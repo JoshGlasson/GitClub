@@ -12,7 +12,7 @@
     </div>
 </nav>
 <h1>Sign Up</h1>
-<form action="#" th:action="@{/user/manager}" th:object="${manager}" method="post" style="max-width:300px;">
+<form action="#" th:action="@{/register/player}" th:object="${player}" method="post" style="max-width:300px;">
     <div class="form-group">
         <input type="text" class="form-control" id="name" placeholder="Enter name" th:field="*{name}" required="true">
     </div>
@@ -25,10 +25,12 @@
     <div class="form-group">
         <input type="hidden" class="form-control" id="role" th:field="*{role}" required="true">
     </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="teamid" th:field="*{teamid}" placeholder="Enter Team ID" required="true">
+    </div>
     <h3>Pick an option below</h3>
     <div class="form-group">
         <select name="position" class="form-control" id="position" placeholder="Enter Preferred Position" th:field="*{position}" required="true">
-            <option value="manager"> Manager Only </option>
             <option value="forward"> Forward</option>
             <option value="midfield"> Midfielder</option>
             <option value="defense"> Defender</option>

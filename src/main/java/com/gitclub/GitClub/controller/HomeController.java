@@ -20,11 +20,13 @@ public class HomeController {
 
     private final ManagerRepository managerRepository;
     private final TeamRepository teamRepository;
+    private final PlayerRepository playerRepository;
 
     @Autowired
-    public HomeController(ManagerRepository managerRepository, TeamRepository teamRepository) {
+    public HomeController(ManagerRepository managerRepository, TeamRepository teamRepository, PlayerRepository playerRepository) {
         this.managerRepository = managerRepository;
         this.teamRepository = teamRepository;
+        this.playerRepository = playerRepository;
     }
 
     @RequestMapping(value = "/")
@@ -60,5 +62,17 @@ public class HomeController {
         HttpSession session = request.getSession();
         session.setAttribute("teamname", teamRepository.findByTeamnameIn(team.getTeamname()));
         return new RedirectView("/user/new/manager");
+    }
+
+    @GetMapping(value = "/registerPlayer")
+    public String player(Model model) {
+        model.addAttribute("player", new PlayerForm("", "", "", "player", "", ""));
+        return "registerPlayer";
+    }
+
+    @PostMapping(value = "/register/player")
+    public RedirectView player(@ModelAttribute Player player) {
+        playerRepository.save(player);
+        return new RedirectView("/");
     }
 }
