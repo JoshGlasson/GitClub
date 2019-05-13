@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sign Up</title>
+    <title>Name Your Team</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
@@ -11,10 +11,10 @@
         <a class="navbar-brand" href="/">GitClub</a>
     </div>
 </nav>
-<h1>Sign Up</h1>
-<form action="#" th:action="@{/getRegisterTeam}" th:object="${team}" method="post" style="max-width:300px;">
+<h1>Team Name</h1>
+<form action="#" th:action="@{/register/team}" th:object="${team}" method="post" style="max-width:300px;">
     <div class="form-group">
-        <input type="text" class="form-control" id="teamname" placeholder="Enter name" th:field="*{teamname}" required="true">
+        <input type="text" class="form-control" id="teamname" placeholder="Enter team name" th:field="*{teamname}" required="true">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

@@ -2,5 +2,5 @@ DROP TABLE IF EXISTS team;
 
 CREATE TABLE team (
   id bigserial PRIMARY KEY,
-  teamname varchar(250) NOT NULL
+  teamname varchar(250) NOT NULL UNIQUE
 );

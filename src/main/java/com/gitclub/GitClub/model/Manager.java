@@ -24,6 +24,14 @@ public class Manager {
 
     }
 
+    public Long getTeamid() {
+        return teamid;
+    }
+
+    public void setTeamid(Long teamid) {
+        this.teamid = teamid;
+    }
+
     public Manager(String name, String email, String password, String role, String position, Long teamid) {
         this.name = name;
         this.email = email;
@@ -45,8 +53,33 @@ public class Manager {
         return this.password;
     }
 
-    public void setTeamid(Long teamid) {
-        this.teamid = teamid;
+    public String getName() {
+        return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
 }
 
