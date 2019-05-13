@@ -30,8 +30,8 @@ public class HomeController {
 
     @GetMapping(value = "user/new/manager")
     public String user(Model model) {
-        model.addAttribute("user", new ManagerForm("", "", "", "manager", ""));
-        return "register_manager";
+        model.addAttribute("manager", new ManagerForm("", "", "", "manager", ""));
+        return "registerManager";
     }
 
     @PostMapping(value = "user/manager")
