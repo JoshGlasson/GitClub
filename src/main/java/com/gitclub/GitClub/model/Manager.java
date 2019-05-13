@@ -18,19 +18,19 @@ public class Manager {
     private String password;
     private String role;
     private String position;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long teamid;
 
     private Manager() {
 
     }
 
-    public Manager(String name, String email, String password, String role, String position) {
+    public Manager(String name, String email, String password, String role, String position, Long teamid) {
         this.name = name;
         this.email = email;
         this.password = this.setPassword(password);
         this.role = role;
         this.position = position;
+        this.teamid = teamid;
     }
 
     public String setPassword(String password) {
@@ -45,5 +45,8 @@ public class Manager {
         return this.password;
     }
 
+    public void setTeamid(Long teamid) {
+        this.teamid = teamid;
+    }
 }
 

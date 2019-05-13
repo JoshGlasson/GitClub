@@ -17,10 +17,12 @@ import org.springframework.web.servlet.view.RedirectView;
 public class HomeController {
 
     private final ManagerRepository managerRepository;
+    private final TeamRepository teamRepository;
 
     @Autowired
-    public HomeController(ManagerRepository managerRepository) {
+    public HomeController(ManagerRepository managerRepository, TeamRepository teamRepository) {
         this.managerRepository = managerRepository;
+        this.teamRepository = teamRepository;
     }
 
     @RequestMapping(value = "/")
@@ -36,6 +38,19 @@ public class HomeController {
 
     @PostMapping(value = "user/manager")
     public RedirectView manager(@ModelAttribute Manager manager) {
+        return new RedirectView("/registerTeam");
+    }
+
+    @GetMapping(value = "/registerTeam")
+    public String team(Model model) {
+        model.addAttribute("team", new TeamForm(""));
+        return "registerTeam";
+    }
+
+    @PostMapping(value = "/getRegisterTeam")
+    public RedirectView team(@ModelAttribute Team team, Manager manager) {
+        teamRepository.save(team);
+        manager.setTeamid(team.getId());
         managerRepository.save(manager);
         return new RedirectView("/");
     }
