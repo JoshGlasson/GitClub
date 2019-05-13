@@ -1,6 +1,7 @@
 package com.gitclub.GitClub.controller;
 
 import com.gitclub.GitClub.model.*;
+import com.gitclub.GitClub.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 
+
 @Controller
 public class HomeController {
 
-    @Autowired
-    public HomeController() {
+    private final ManagerRepository managerRepository;
 
+    @Autowired
+    public HomeController(ManagerRepository managerRepository) {
+        this.managerRepository = managerRepository;
     }
 
     @RequestMapping(value = "/")
@@ -30,9 +34,9 @@ public class HomeController {
         return "register_manager";
     }
 
-    @PostMapping(value = "manager/manager")
-    public RedirectView user(@ModelAttribute Manager manager) {
-//        userRepository.save(manager);
+    @PostMapping(value = "user/manager")
+    public RedirectView manager(@ModelAttribute Manager manager) {
+        managerRepository.save(manager);
         return new RedirectView("/");
     }
 }
