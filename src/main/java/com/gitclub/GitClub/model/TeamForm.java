@@ -8,13 +8,12 @@ public class TeamForm {
         this.teamname = teamname;
     }
 
-    public void setName(String name) {
-        this.teamname = name;
-    }
-
-    public String getName() {
+    public String getTeamname() {
         return teamname;
     }
 
+    public void setTeamname(String teamname) {
+        this.teamname = teamname;
+    }
 
 }

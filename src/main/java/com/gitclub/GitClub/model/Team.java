@@ -26,5 +26,13 @@ public class Team {
     public Long getId() {
         return id;
     }
+
+    public String getTeamname() {
+        return teamname;
+    }
+
+    public void setTeamname(String teamname) {
+        this.teamname = teamname;
+    }
 }
 

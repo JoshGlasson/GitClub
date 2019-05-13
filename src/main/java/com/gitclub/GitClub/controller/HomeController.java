@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -37,8 +39,13 @@ public class HomeController {
     }
 
     @PostMapping(value = "user/manager")
-    public RedirectView manager(@ModelAttribute Manager manager) {
-        return new RedirectView("/registerTeam");
+    public RedirectView manager(@ModelAttribute Manager manager, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Team team = (Team) session.getAttribute("teamname");
+
+        manager.setTeamid(team.getId());
+        managerRepository.save(manager);
+        return new RedirectView("/");
     }
 
     @GetMapping(value = "/registerTeam")
@@ -47,11 +54,11 @@ public class HomeController {
         return "registerTeam";
     }
 
-    @PostMapping(value = "/getRegisterTeam")
-    public RedirectView team(@ModelAttribute Team team, Manager manager) {
+    @PostMapping(value = "/register/team")
+    public RedirectView team(@ModelAttribute Team team, HttpServletRequest request) {
         teamRepository.save(team);
-        manager.setTeamid(team.getId());
-        managerRepository.save(manager);
-        return new RedirectView("/");
+        HttpSession session = request.getSession();
+        session.setAttribute("teamname", teamRepository.findByTeamnameIn(team.getTeamname()));
+        return new RedirectView("/user/new/manager");
     }
 }
