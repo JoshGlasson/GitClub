@@ -31,7 +31,16 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/")
-    public String index() {
+    public String index(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("current user")!=null) {
+            if (session.getAttribute("current user").getClass() == Manager.class) ;
+            {
+                Manager manager = (Manager) session.getAttribute("current user");
+                model.addAttribute("role", manager.getRole());
+            }
+        }
+
         return "index";
     }
 
@@ -110,11 +119,18 @@ public class HomeController {
             HttpSession session = request.getSession();
             session.setAttribute("current user", managerRepository.findByEmailIn(user.getEmail()));
             System.out.println("Signed in");
+            return new RedirectView("/landingpage");
         }
         else
         {
             System.out.println("does not match");
+            return new RedirectView("/");
         }
-        return new RedirectView("/");
+
+    }
+
+    @GetMapping(value = "/landingpage")
+    public String landing() {
+        return "landingpage";
     }
 }
