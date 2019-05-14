@@ -1,5 +1,5 @@
 language: java
 services:
-  - mysql
+  - postgresql
 before_install:
-  - mysql -e 'CREATE DATABASE gitclub;'
+  - psql -c 'create database gitclub;' -U postgres
