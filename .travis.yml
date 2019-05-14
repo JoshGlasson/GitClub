@@ -5,9 +5,3 @@ services:
 
 addons:
   postgresql: "11.2"
-
-env:
-  - DB_USERNAME=gitclub
-
-before_install:
-  - psql -c "CREATE DATABASE gitclub;" -U postgres
