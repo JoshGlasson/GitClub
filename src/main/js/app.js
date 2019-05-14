@@ -6,14 +6,18 @@ class App extends React.Component {
 
   render() {
     return (
-    <div><h1>"Hello"</h1></div>
+    <div>
+        <h1>"Hello"</h1>
+        <a href="/addFixtures">addFixtures</a>
+    </div>
+
     )
   }
 }
 
 ReactDOM.render(
 	<App />,
-	document.getElementById('app')
+	document.getElementById('landingPage')
 )
 
 

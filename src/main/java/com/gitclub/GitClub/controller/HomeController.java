@@ -1,16 +1,14 @@
 package com.gitclub.GitClub.controller;
 
 import com.gitclub.GitClub.model.*;
-import com.gitclub.GitClub.repositories.*;
+import com.gitclub.GitClub.repositories.TeamRepository;
+import com.gitclub.GitClub.repositories.UserRepository;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -132,6 +130,7 @@ public class HomeController {
         if (session.getAttribute("current user")!=null) {
             User user = (User) session.getAttribute("current user");
             model.addAttribute("role", user.getRole());
+            model.addAttribute("teamid", user.getTeamid());
         }
         return "landingpage";
     }
@@ -143,5 +142,16 @@ public class HomeController {
         session.setAttribute("role", null);
         session.setAttribute("teamname", null);
         return new RedirectView("/");
+    }
+
+    @GetMapping(value = "/addFixtures")
+    public String addFixtures(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("current user")!=null) {
+            User user = (User) session.getAttribute("current user");
+            model.addAttribute("role", user.getRole());
+            model.addAttribute("teamid", user.getTeamid());
+        }
+        return "addFixtures";
     }
 }
