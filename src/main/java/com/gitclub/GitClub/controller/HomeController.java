@@ -142,6 +142,7 @@ public class HomeController {
         HttpSession session = request.getSession();
         session.setAttribute("current user", null);
         session.setAttribute("role", null);
+
         session.setAttribute("teamname", null);
         return new RedirectView("/");
     }
