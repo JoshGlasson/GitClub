@@ -1,13 +1,11 @@
 language: java
-addons:
-  postgresql: "10"
-  apt:
-    packages:
-      - postgresql-10
-      - postgresql-client-10
-env:
-  global:
-    - PGPORT=5432
+postgres:
+  adapter: postgresql
+  database: gitclub
 
-before_install:
-  - psql -c "CREATE DATABASE gitclub;" -U postgres
+install: true
+
+script: mvn clean package -DskipTests=true
+
+before_script:
+  - "psql -c 'create database gitclub;' -U postgres"
