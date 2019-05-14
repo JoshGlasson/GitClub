@@ -1,6 +1,4 @@
 HELP.md
-mvnw
-mvnw.cmd
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -29,3 +27,11 @@ mvnw.cmd
 
 ### VS Code ###
 .vscode/
+
+
+
+
+/node_modules
+dependency-reduced-pom.xml
+.log
+/src/main/resources/static/built
