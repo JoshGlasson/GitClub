@@ -124,13 +124,10 @@ public class HomeController {
     public String landing(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         if (session.getAttribute("current user")!=null) {
-            if (session.getAttribute("current user").getClass() == Manager.class) ;
+            if (session.getAttribute("current user").getClass() == Manager.class)
             {
                 Manager manager = (Manager) session.getAttribute("current user");
-                model.addAttribute("role", "manager");
-            }
-            else {
-                model.addAttribute("role", "player");
+                model.addAttribute("role", manager.getRole());
             }
         }
         return "landingpage";
