@@ -3,5 +3,9 @@ postgres:
   adapter: postgresql
   database: gitclub
 
+install: true
+
+script: mvn clean package -DskipTests=true
+
 before_script:
   - "psql -c 'create database gitclub;' -U postgres"
