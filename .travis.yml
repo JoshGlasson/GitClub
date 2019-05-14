@@ -1,6 +1,4 @@
 language: java
 
 before_install:
-addons:
-    postgresql: "10"
   - psql -c "CREATE DATABASE gitclub;" -U postgres
