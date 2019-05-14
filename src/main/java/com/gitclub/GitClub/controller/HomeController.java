@@ -31,16 +31,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/")
-    public String index(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("current user")!=null) {
-            if (session.getAttribute("current user").getClass() == Manager.class) ;
-            {
-                Manager manager = (Manager) session.getAttribute("current user");
-                model.addAttribute("role", manager.getRole());
-            }
-        }
-
+    public String index() {
         return "index";
     }
 
@@ -130,7 +121,18 @@ public class HomeController {
     }
 
     @GetMapping(value = "/landingpage")
-    public String landing() {
+    public String landing(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("current user")!=null) {
+            if (session.getAttribute("current user").getClass() == Manager.class) ;
+            {
+                Manager manager = (Manager) session.getAttribute("current user");
+                model.addAttribute("role", "manager");
+            }
+            else {
+                model.addAttribute("role", "player");
+            }
+        }
         return "landingpage";
     }
 }
