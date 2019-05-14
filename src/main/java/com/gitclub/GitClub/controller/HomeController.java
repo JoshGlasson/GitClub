@@ -103,16 +103,20 @@ public class HomeController {
     }
 
     @PostMapping(value = "user/authentication")
-    public RedirectView signIn(@ModelAttribute SignInForm user, HttpServletRequest request) {
-        if (SignIn.checkPassword(user.getPassword(), userRepository.findByEmailIn(user.getEmail()).getPassword())){
-            HttpSession session = request.getSession();
-            session.setAttribute("current user", userRepository.findByEmailIn(user.getEmail()));
-            System.out.println("Signed in");
-            return new RedirectView("/landingpage");
-        }
-        else
-        {
-            System.out.println("does not match");
+    public RedirectView signIn(@ModelAttribute SignInForm user, HttpServletRequest request, RedirectAttributes redirAttrs) {
+        try {
+            if(SignIn.checkPassword(user.getPassword(), userRepository.findByEmailIn(user.getEmail()).getPassword())) {
+                HttpSession session = request.getSession();
+                session.setAttribute("current user", userRepository.findByEmailIn(user.getEmail()));
+                System.out.println("Signed in");
+                redirAttrs.addFlashAttribute("message", "Incorrect Login Details");
+                return new RedirectView("/landingpage");
+            } else {
+                redirAttrs.addFlashAttribute("message", "Incorrect Password");
+                return new RedirectView("/");
+            }
+        } catch (Exception e) {
+            redirAttrs.addFlashAttribute("message", "Incorrect Email Address");
             return new RedirectView("/");
         }
     }
@@ -125,5 +129,14 @@ public class HomeController {
             model.addAttribute("role", user.getRole());
         }
         return "landingpage";
+    }
+
+    @GetMapping(value = "user/signout")
+    public RedirectView signOut(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("current user", null);
+        session.setAttribute("role", null);
+        session.setAttribute("teamname", null);
+        return new RedirectView("/");
     }
 }
