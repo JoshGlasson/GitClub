@@ -2,7 +2,9 @@ package com.gitclub.GitClub.controller;
 
 import com.gitclub.GitClub.model.*;
 import com.gitclub.GitClub.repositories.*;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,7 +87,7 @@ public class HomeController {
         try {
             userRepository.save(user);
             return new RedirectView("/");
-        } catch (Exception e) {
+        } catch (DataIntegrityViolationException e) {
             if(e.toString().contains("email")) {
                 redirAttrs.addFlashAttribute("message", "Email Address Already In Use");
                 return new RedirectView("/registerPlayer");
@@ -93,6 +95,9 @@ public class HomeController {
                 redirAttrs.addFlashAttribute("message", "Team Does Not Exist");
                 return new RedirectView("/registerPlayer");
             }
+        } catch (TypeMismatchException e) {
+            redirAttrs.addFlashAttribute("message", "Please Enter Team ID Number");
+            return new RedirectView("/registerPlayer");
         }
     }
 
