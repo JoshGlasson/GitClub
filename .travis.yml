@@ -3,3 +3,5 @@ services:
   - postgresql
 before_install:
   - psql -c 'create database gitclub;' -U postgres
+addons:
+  postgresql: "11.2"
