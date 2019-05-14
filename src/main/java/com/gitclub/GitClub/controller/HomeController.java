@@ -105,19 +105,18 @@ public class HomeController {
     }
 
     @PostMapping(value = "user/authentication")
-    public RedirectView signIn(@ModelAttribute SignInForm user, HttpServletRequest request) {
-        if (SignIn.checkPassword(user.getPassword(), managerRepository.findByEmailIn(user.getEmail()).getPassword())){
-            HttpSession session = request.getSession();
-            session.setAttribute("current user", managerRepository.findByEmailIn(user.getEmail()));
-            System.out.println("Signed in");
-            return new RedirectView("/landingpage");
-        }
-        else
-        {
-            System.out.println("does not match");
+    public RedirectView signIn(@ModelAttribute SignInForm user, HttpServletRequest request, RedirectAttributes redirAttrs) {
+        try {
+            if (SignIn.checkPassword(user.getPassword(), managerRepository.findByEmailIn(user.getEmail()).getPassword())) {
+                HttpSession session = request.getSession();
+                session.setAttribute("current user", managerRepository.findByEmailIn(user.getEmail()));
+                System.out.println("Signed in");
+            }
+        } catch (Exception e) {
+            redirAttrs.addFlashAttribute("message", "Incorrect Login Details");
             return new RedirectView("/");
         }
-
+        return new RedirectView("/landingpage");
     }
 
     @GetMapping(value = "/landingpage")
