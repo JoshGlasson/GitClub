@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -11,6 +11,13 @@
 <nav class="navbar navbar-dark bg-primary">
     <div>
         <a class="navbar-brand" href="/">GitClub</a>
+
+        <form class="form-inline" action="#" th:action="@{/user/authentication}" th:object="${user}" method="post">
+            <input class="form-control mr-sm-2" type="email" th:field="*{email}" required="true" placeholder="email address"/>
+            <input class="form-control mr-sm-2" type="password" th:field="*{password}" required="true" placeholder="password"/>
+            <input type="submit" value="Sign In" class="btn btn-outline-success"/>
+        </form>
+
     </div>
 </nav>
 <h1>Welcome to GitClub!</h1>

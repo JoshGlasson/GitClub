@@ -1,4 +1,4 @@
-package com.gitclub.GitClub.model.;
+package com.gitclub.GitClub.model;
 
 public class SignInForm {
 
