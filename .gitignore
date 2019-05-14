@@ -35,5 +35,3 @@ HELP.md
 dependency-reduced-pom.xml
 .log
 /src/main/resources/static/built
-/mvnw
-/mvnw.cmd
