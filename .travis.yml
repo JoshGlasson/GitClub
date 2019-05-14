@@ -4,4 +4,4 @@ services:
   - postgresql
 
 addons:
-  postgresql: "11.2"
+  postgresql: "9.6"
