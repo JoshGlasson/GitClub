@@ -4,7 +4,5 @@ addons:
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get purge postgresql-9.1 postgresql-9.2 postgresql-9.3
-  - sudo apt-get install postgresql-client-common postgresql-10.0
   - sudo service postgresql start
   - psql -c "CREATE DATABASE gitclub;" -U postgres
