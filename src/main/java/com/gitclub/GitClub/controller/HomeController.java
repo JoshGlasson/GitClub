@@ -35,6 +35,26 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping(value = "/registerTeam")
+    public String team(Model model) {
+        model.addAttribute("team", new TeamForm(""));
+        return "registerTeam";
+    }
+
+    @PostMapping(value = "/register/team")
+    public RedirectView team(@ModelAttribute Team team, HttpServletRequest request, RedirectAttributes redirAttrs) {
+        try {
+            teamRepository.save(team);
+            HttpSession session = request.getSession();
+            session.setAttribute("teamname", teamRepository.findByTeamnameIn(team.getTeamname()));
+            return new RedirectView("/registerManager");
+        }
+        catch (Exception e) {
+            redirAttrs.addFlashAttribute("message", "Team Name Taken");
+            return new RedirectView("/registerTeam");
+        }
+    }
+
     @GetMapping(value = "registerManager")
     public String user(Model model) {
         model.addAttribute("manager", new ManagerForm("", "", "", "manager", ""));
@@ -55,25 +75,6 @@ public class HomeController {
     }
     }
 
-    @GetMapping(value = "/registerTeam")
-    public String team(Model model) {
-        model.addAttribute("team", new TeamForm(""));
-        return "registerTeam";
-    }
-
-    @PostMapping(value = "/register/team")
-    public RedirectView team(@ModelAttribute Team team, HttpServletRequest request, RedirectAttributes redirAttrs) {
-        try {
-            teamRepository.save(team);
-            HttpSession session = request.getSession();
-            session.setAttribute("teamname", teamRepository.findByTeamnameIn(team.getTeamname()));
-            return new RedirectView("/registerManager");
-        }
-        catch (Exception e) {
-            redirAttrs.addFlashAttribute("message", "Team Name Taken");
-            return new RedirectView("/registerTeam");
-        }
-    }
 
     @GetMapping(value = "/registerPlayer")
     public String player(Model model) {
@@ -95,5 +96,22 @@ public class HomeController {
                 return new RedirectView("/registerPlayer");
             }
         }
+    }
+
+    @PostMapping(value = "user/authentication")
+    public RedirectView signIn(@ModelAttribute SignInForm user, HttpServletRequest request) {
+        if (SignIn.checkPassword(user.getPassword(), managerRepository.findByEmailIn(user.getEmail()).getPassword())){
+            HttpSession session = request.getSession();
+            session.setAttribute("current user", managerRepository.findByEmailIn(user.getEmail()));
+        }
+        else if (SignIn.checkPassword(user.getPassword(), playerRepository.findByEmailIn(user.getEmail()).getPassword())){
+            HttpSession session = request.getSession();
+            session.setAttribute("current user", playerRepository.findByEmailIn(user.getEmail()));
+        }
+        else
+        {
+            System.out.println("does not match");
+        }
+        return new RedirectView("/");
     }
 }
