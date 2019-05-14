@@ -106,14 +106,10 @@ public class HomeController {
 
     @PostMapping(value = "user/authentication")
     public RedirectView signIn(@ModelAttribute SignInForm user, HttpServletRequest request) {
-       // model.addAttribute("user", new SignInForm("",""));
         if (SignIn.checkPassword(user.getPassword(), managerRepository.findByEmailIn(user.getEmail()).getPassword())){
             HttpSession session = request.getSession();
             session.setAttribute("current user", managerRepository.findByEmailIn(user.getEmail()));
-        }
-        else if (SignIn.checkPassword(user.getPassword(), playerRepository.findByEmailIn(user.getEmail()).getPassword())){
-            HttpSession session = request.getSession();
-            session.setAttribute("current user", playerRepository.findByEmailIn(user.getEmail()));
+            System.out.println("Signed in");
         }
         else
         {
