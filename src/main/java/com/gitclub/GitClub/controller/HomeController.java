@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -125,14 +126,16 @@ public class HomeController {
     }
 
     @GetMapping(value = "/landingpage")
-    public String landing(HttpServletRequest request, Model model) {
+    public ModelAndView landing(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         if (session.getAttribute("current user")!=null) {
             User user = (User) session.getAttribute("current user");
             model.addAttribute("role", user.getRole());
             model.addAttribute("teamid", user.getTeamid());
+            return new ModelAndView( "landingPage");
+        } else {
+            return new ModelAndView(new RedirectView("/"));
         }
-        return "landingpage";
     }
 
     @GetMapping(value = "user/signout")
@@ -145,13 +148,15 @@ public class HomeController {
     }
 
     @GetMapping(value = "/addFixtures")
-    public String addFixtures(HttpServletRequest request, Model model) {
+    public ModelAndView addFixtures(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         if (session.getAttribute("current user")!=null) {
             User user = (User) session.getAttribute("current user");
             model.addAttribute("role", user.getRole());
             model.addAttribute("teamid", user.getTeamid());
+            return new ModelAndView( "addFixtures");
+        } else {
+            return new ModelAndView(new RedirectView("/"));
         }
-        return "addFixtures";
     }
 }

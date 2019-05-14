@@ -8,7 +8,7 @@ class App extends React.Component {
     return (
     <div>
         <h1>"Hello"</h1>
-        <a href="/addFixtures">addFixtures</a>
+        <a href="/addFixtures">Add Fixtures</a>
     </div>
 
     )
