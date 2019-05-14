@@ -19,15 +19,13 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
-    private final ManagerRepository managerRepository;
+    private final UserRepository userRepository;
     private final TeamRepository teamRepository;
-    private final PlayerRepository playerRepository;
 
     @Autowired
-    public HomeController(ManagerRepository managerRepository, TeamRepository teamRepository, PlayerRepository playerRepository) {
-        this.managerRepository = managerRepository;
+    public HomeController(UserRepository userRepository, TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
-        this.playerRepository = playerRepository;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping(value = "/")
@@ -57,17 +55,17 @@ public class HomeController {
 
     @GetMapping(value = "registerManager")
     public String user(Model model) {
-        model.addAttribute("manager", new ManagerForm("", "", "", "manager", ""));
+        model.addAttribute("manager", new UserForm("", "", "", "manager", "", ""));
         return "registerManager";
     }
 
     @PostMapping(value = "register/manager")
-    public RedirectView manager(@ModelAttribute Manager manager, HttpServletRequest request, RedirectAttributes redirAttrs) {
+    public RedirectView manager(@ModelAttribute User user, HttpServletRequest request, RedirectAttributes redirAttrs) {
         try {
             HttpSession session = request.getSession();
             Team team = (Team) session.getAttribute("teamname");
-            manager.setTeamid(team.getId());
-            managerRepository.save(manager);
+            user.setTeamid(team.getId());
+            userRepository.save(user);
             return new RedirectView("/");
         } catch (Exception e) {
         redirAttrs.addFlashAttribute("message", "Email Address Already In Use");
@@ -78,14 +76,14 @@ public class HomeController {
 
     @GetMapping(value = "/registerPlayer")
     public String player(Model model) {
-        model.addAttribute("player", new PlayerForm("", "", "", "player", "", ""));
+        model.addAttribute("player", new UserForm("", "", "", "player", "", ""));
         return "registerPlayer";
     }
 
     @PostMapping(value = "/register/player")
-    public RedirectView player(@ModelAttribute Player player, RedirectAttributes redirAttrs){
+    public RedirectView player(@ModelAttribute User user, RedirectAttributes redirAttrs){
         try {
-            playerRepository.save(player);
+            userRepository.save(user);
             return new RedirectView("/");
         } catch (Exception e) {
             if(e.toString().contains("email")) {
@@ -105,29 +103,26 @@ public class HomeController {
     }
 
     @PostMapping(value = "user/authentication")
-    public RedirectView signIn(@ModelAttribute SignInForm user, HttpServletRequest request, RedirectAttributes redirAttrs) {
-        try {
-            if (SignIn.checkPassword(user.getPassword(), managerRepository.findByEmailIn(user.getEmail()).getPassword())) {
-                HttpSession session = request.getSession();
-                session.setAttribute("current user", managerRepository.findByEmailIn(user.getEmail()));
-                System.out.println("Signed in");
-            }
-        } catch (Exception e) {
-            redirAttrs.addFlashAttribute("message", "Incorrect Login Details");
+    public RedirectView signIn(@ModelAttribute SignInForm user, HttpServletRequest request) {
+        if (SignIn.checkPassword(user.getPassword(), userRepository.findByEmailIn(user.getEmail()).getPassword())){
+            HttpSession session = request.getSession();
+            session.setAttribute("current user", userRepository.findByEmailIn(user.getEmail()));
+            System.out.println("Signed in");
+            return new RedirectView("/landingpage");
+        }
+        else
+        {
+            System.out.println("does not match");
             return new RedirectView("/");
         }
-        return new RedirectView("/landingpage");
     }
 
     @GetMapping(value = "/landingpage")
     public String landing(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         if (session.getAttribute("current user")!=null) {
-            if (session.getAttribute("current user").getClass() == Manager.class)
-            {
-                Manager manager = (Manager) session.getAttribute("current user");
-                model.addAttribute("role", manager.getRole());
-            }
+            User user = (User) session.getAttribute("current user");
+            model.addAttribute("role", user.getRole());
         }
         return "landingpage";
     }

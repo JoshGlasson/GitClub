@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "USERS")
-public class Manager {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Manager {
     private String position;
     private Long teamid;
 
-    private Manager() {
+    private User() {
 
     }
 
@@ -32,7 +32,7 @@ public class Manager {
         this.teamid = teamid;
     }
 
-    public Manager(String name, String email, String password, String role, String position, Long teamid) {
+    public User(String name, String email, String password, String role, String position, Long teamid) {
         this.name = name;
         this.email = email;
         this.password = this.setPassword(password);

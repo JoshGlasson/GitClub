@@ -1,19 +1,21 @@
 package com.gitclub.GitClub.model;
 
-public class ManagerForm {
+public class UserForm {
 
     private String name;
     private String email;
     private String password;
     private String role;
     private String position;
+    private String teamid;
 
-    public ManagerForm(String name, String email, String password, String role, String position) {
+    public UserForm(String name, String email, String password, String role, String position, String teamid) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
         this.position = position;
+        this.teamid = teamid;
     }
 
     public void setName(String name) {
@@ -57,4 +59,11 @@ public class ManagerForm {
         this.position = position;
     }
 
+    public String getTeamid() {
+        return teamid;
+    }
+
+    public void setTeamid(String teamid) {
+        this.teamid = teamid;
+    }
 }
