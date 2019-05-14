@@ -12,6 +12,7 @@
     </div>
 </nav>
 <h1>Sign Up</h1>
+<h2 th:text="${message}"></h2>
 <form action="#" th:action="@{/register/player}" th:object="${player}" method="post" style="max-width:300px;">
     <div class="form-group">
         <input type="text" class="form-control" id="name" placeholder="Enter name" th:field="*{name}" required="true">

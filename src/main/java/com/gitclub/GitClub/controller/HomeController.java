@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,20 +35,24 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping(value = "user/new/manager")
+    @GetMapping(value = "registerManager")
     public String user(Model model) {
         model.addAttribute("manager", new ManagerForm("", "", "", "manager", ""));
         return "registerManager";
     }
 
-    @PostMapping(value = "user/manager")
-    public RedirectView manager(@ModelAttribute Manager manager, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Team team = (Team) session.getAttribute("teamname");
-
-        manager.setTeamid(team.getId());
-        managerRepository.save(manager);
-        return new RedirectView("/");
+    @PostMapping(value = "register/manager")
+    public RedirectView manager(@ModelAttribute Manager manager, HttpServletRequest request, RedirectAttributes redirAttrs) {
+        try {
+            HttpSession session = request.getSession();
+            Team team = (Team) session.getAttribute("teamname");
+            manager.setTeamid(team.getId());
+            managerRepository.save(manager);
+            return new RedirectView("/");
+        } catch (Exception e) {
+        redirAttrs.addFlashAttribute("message", "Email Address Already In Use");
+        return new RedirectView("/registerManager");
+    }
     }
 
     @GetMapping(value = "/registerTeam")
@@ -57,11 +62,17 @@ public class HomeController {
     }
 
     @PostMapping(value = "/register/team")
-    public RedirectView team(@ModelAttribute Team team, HttpServletRequest request) {
-        teamRepository.save(team);
-        HttpSession session = request.getSession();
-        session.setAttribute("teamname", teamRepository.findByTeamnameIn(team.getTeamname()));
-        return new RedirectView("/user/new/manager");
+    public RedirectView team(@ModelAttribute Team team, HttpServletRequest request, RedirectAttributes redirAttrs) {
+        try {
+            teamRepository.save(team);
+            HttpSession session = request.getSession();
+            session.setAttribute("teamname", teamRepository.findByTeamnameIn(team.getTeamname()));
+            return new RedirectView("/registerManager");
+        }
+        catch (Exception e) {
+            redirAttrs.addFlashAttribute("message", "Team Name Taken");
+            return new RedirectView("/registerTeam");
+        }
     }
 
     @GetMapping(value = "/registerPlayer")
@@ -71,8 +82,18 @@ public class HomeController {
     }
 
     @PostMapping(value = "/register/player")
-    public RedirectView player(@ModelAttribute Player player) {
-        playerRepository.save(player);
-        return new RedirectView("/");
+    public RedirectView player(@ModelAttribute Player player, RedirectAttributes redirAttrs){
+        try {
+            playerRepository.save(player);
+            return new RedirectView("/");
+        } catch (Exception e) {
+            if(e.toString().contains("email")) {
+                redirAttrs.addFlashAttribute("message", "Email Address Already In Use");
+                return new RedirectView("/registerPlayer");
+            } else {
+                redirAttrs.addFlashAttribute("message", "Team Does Not Exist");
+                return new RedirectView("/registerPlayer");
+            }
+        }
     }
 }
