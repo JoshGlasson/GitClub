@@ -1,9 +1,8 @@
 language: java
-addons:
-  postgresql: "10"
+postgres:
+  adapter: postgresql
+  database: gitclub
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install -q postgresql-10 postgresql-client-10
-  - sudo service postgresql start
-  - psql -c "CREATE DATABASE gitclub;" -U postgres
+before_script:
+  - "psql -c 'create database gitclub;' -U postgres"
+  - "rake db:migrate"
