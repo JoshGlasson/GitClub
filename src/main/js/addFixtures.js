@@ -68,14 +68,14 @@ constructor(props){
 
            <div id={"collapse"} class="collapse" aria-labelledby={"fixtures"}>
                <div class="card-body">
-                   {this.state.fixtures.map((item, key) =>
+                   {this.state.fixtures.reverse().map((item, key) =>
                        <Fixtures item={item} key={item.id} />
+
                    )}
                </div>
            </div>
       </div>
   </div>
-
 
     return (
     <div>
@@ -158,16 +158,6 @@ constructor(props){
      }
   }
 
-//  getFixtures(){
-//
-//  for each(var item in this.state.fixtures) {
-//    return item;
-//  }
-////    return this.state.fixtures.sort( function(a, b){
-////        return new Date(b.date) - new Date(a.date);
-////        })
-////      }
-
 }
 
 ReactDOM.render(
@@ -176,55 +166,3 @@ ReactDOM.render(
 )
 
 
-
-//<div className='comments-item'>
-//                <div class="card">
-//                     <div class="card-header" id={"comments"+this.id}>
-//                         <h2 class="mb-0">
-//                             <button class="btn btn-link" type="button" data-toggle="collapse" data-target={"#collapse"+this.id} aria-expanded="true" aria-controls={"collapse"+this.id}>
-//                                 <h5>View Comments</h5>
-//                             </button>
-//                         </h2>
-//                     </div>
-//
-//                     <div id={"collapse"+this.id} class="collapse" aria-labelledby={"comments"+this.id}>
-//                         <div class="card-body">
-//                             {this.getComments()}
-//                         </div>
-//                     </div>
-//                {commentBox}
-//                </div>
-//            </div>
-//
-//
-
-//let commentBox;
-//
-//if(this.state.userid !== "") {
-//commentBox =
-//<div class="card">
-//     <div class="card-header" id={"heading"+this.id}>
-//         <h2 class="mb-0">
-//             <button class="btn btn-link" type="button" data-toggle="collapse" data-target={"#collapseTwo"+this.id} aria-expanded="true" aria-controls={"collapseTwo"+this.id}>
-//                 Add Comment
-//             </button>
-//         </h2>
-//     </div>
-//
-//     <div id={"collapseTwo"+this.id} class="collapse" aria-labelledby={"heading"+this.id} >
-//         <div class="card-body">
-//             <div class="form-group">
-//                <form onSubmit={this.sendComment} action="/">
-//                   <input type="text" class="form-control" id={"comment-text"+this.id}  placeholder="What would you like to say?"></input>
-//                   <a href="/"><button type="button" class="btn btn-primary" onClick={this.sendComment} >Submit</button></a>
-//                </form>
-//              </div>
-//         </div>
-//     </div>
-//</div>
-//}
-//
-//client({method: 'GET', path: '/api/likes/search/findByPostidAndUserid?postid='+ this.id +'&userid='+ this.state.userid}).then(response => {
-//                    this.setState({likeid: response.entity._embedded.likes[0]._links.self.href.split("/")[response.entity._embedded.likes[0]._links.self.href.split("/").length-1]})
-//                    console.log(this.state.likeid)
-//                });
