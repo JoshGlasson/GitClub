@@ -34,6 +34,10 @@
     </nav>
     <input type="hidden" id="role" th:attr="value=${role}">
     <h1 th:text="${role}"></h1>
+
+    <input type="hidden" id="teamid" th:attr="value=${teamid}">
+    <h1 style="display:inline;">Your TeamID: </h1> <h1 style="display:inline;" th:text="${teamid}"></h1>
+
     <div id="landingPage"></div>
     <script src="built/landingPage.js"></script>
 </body>
