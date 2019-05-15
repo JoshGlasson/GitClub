@@ -68,10 +68,11 @@ constructor(props){
 
            <div id={"collapse"} class="collapse" aria-labelledby={"fixtures"}>
                <div class="card-body">
+
                    {this.state.fixtures.reverse().map((item, key) =>
                        <Fixtures item={item} key={item.id} />
-
                    )}
+
                </div>
            </div>
       </div>
