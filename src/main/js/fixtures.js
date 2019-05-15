@@ -5,11 +5,12 @@ class Fixtures extends Component {
         return (
             <div>
 
-                <p>| {this.props.item.fixture} | {this.props.item.date} | {this.props.item.location} |</p>
+
+                 <p>| {this.props.item.fixture} | {this.props.item.date} | {this.props.item.location} |</p>
 
 
 
-            </div>
+            </div
         );
     }
 }
