@@ -10,8 +10,8 @@ class Fixtures extends Component {
 
 
 
-            </div
-        );
+            </div>
+        )
     }
 }
 

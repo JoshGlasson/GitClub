@@ -142,14 +142,6 @@ public class HomeController {
         }
     }
 
-    @GetMapping(value = "user/signout")
-    public RedirectView signOut(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.setAttribute("current user", null);
-        session.setAttribute("role", null);
-        session.setAttribute("teamname", null);
-        return new RedirectView("/");
-    }
 
     @GetMapping(value = "/addFixtures")
     public ModelAndView addFixtures(HttpServletRequest request, Model model) {
@@ -162,5 +154,27 @@ public class HomeController {
         } else {
             return new ModelAndView(new RedirectView("/"));
         }
+    }
+
+    @GetMapping(value = "/viewTeam")
+    public ModelAndView viewTeam(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("current user")!=null) {
+            User user = (User) session.getAttribute("current user");
+            model.addAttribute("role", user.getRole());
+            model.addAttribute("teamid", user.getTeamid());
+            return new ModelAndView( "viewTeam");
+        } else {
+            return new ModelAndView(new RedirectView("/"));
+        }
+    }
+
+    @GetMapping(value = "user/signout")
+    public RedirectView signOut(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("current user", null);
+        session.setAttribute("role", null);
+        session.setAttribute("teamname", null);
+        return new RedirectView("/");
     }
 }

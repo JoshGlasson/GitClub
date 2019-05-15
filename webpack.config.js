@@ -3,7 +3,8 @@ var path = require('path');
 module.exports = {
     entry: {
         landingPage: './src/main/js/app.js',
-        addFixturesPage: './src/main/js/addFixtures.js'
+        addFixturesPage: './src/main/js/addFixtures.js',
+         viewTeamsPage: './src/main/js/viewTeam.js'
     },
     devtool: 'sourcemaps',
     cache: true,
