@@ -32,10 +32,10 @@ public class HomeController {
     @RequestMapping(value = "/")
     public ModelAndView index(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("current user")!=null) {
-            return new ModelAndView( new RedirectView("/landingpage"));
+        if (session.getAttribute("current user") != null) {
+            return new ModelAndView(new RedirectView("/landingpage"));
         }
-        return new ModelAndView( "index");
+        return new ModelAndView("index");
     }
 
     @GetMapping(value = "/registerTeam")
@@ -51,8 +51,7 @@ public class HomeController {
             HttpSession session = request.getSession();
             session.setAttribute("teamname", teamRepository.findByTeamnameIn(team.getTeamname()));
             return new RedirectView("/registerManager");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             redirAttrs.addFlashAttribute("message", "Team Name Taken");
             return new RedirectView("/registerTeam");
         }
@@ -73,9 +72,9 @@ public class HomeController {
             userRepository.save(user);
             return new RedirectView("/");
         } catch (Exception e) {
-        redirAttrs.addFlashAttribute("message", "Email Address Already In Use");
-        return new RedirectView("/registerManager");
-    }
+            redirAttrs.addFlashAttribute("message", "Email Address Already In Use");
+            return new RedirectView("/registerManager");
+        }
     }
 
 
@@ -86,12 +85,12 @@ public class HomeController {
     }
 
     @PostMapping(value = "/register/player")
-    public RedirectView player(@ModelAttribute User user, RedirectAttributes redirAttrs){
+    public RedirectView player(@ModelAttribute User user, RedirectAttributes redirAttrs) {
         try {
             userRepository.save(user);
             return new RedirectView("/");
         } catch (DataIntegrityViolationException e) {
-            if(e.toString().contains("email")) {
+            if (e.toString().contains("email")) {
                 redirAttrs.addFlashAttribute("message", "Email Address Already In Use");
                 return new RedirectView("/registerPlayer");
             } else {
@@ -113,7 +112,7 @@ public class HomeController {
     @PostMapping(value = "user/authentication")
     public RedirectView signIn(@ModelAttribute SignInForm user, HttpServletRequest request, RedirectAttributes redirAttrs) {
         try {
-            if(SignIn.checkPassword(user.getPassword(), userRepository.findByEmailIn(user.getEmail()).getPassword())) {
+            if (SignIn.checkPassword(user.getPassword(), userRepository.findByEmailIn(user.getEmail()).getPassword())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("current user", userRepository.findByEmailIn(user.getEmail()));
                 System.out.println("Signed in");
@@ -132,11 +131,11 @@ public class HomeController {
     @GetMapping(value = "/landingpage")
     public ModelAndView landing(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("current user")!=null) {
+        if (session.getAttribute("current user") != null) {
             User user = (User) session.getAttribute("current user");
             model.addAttribute("role", user.getRole());
             model.addAttribute("teamid", user.getTeamid());
-            return new ModelAndView( "landingPage");
+            return new ModelAndView("landingPage");
         } else {
             return new ModelAndView(new RedirectView("/"));
         }
@@ -154,11 +153,24 @@ public class HomeController {
     @GetMapping(value = "/addFixtures")
     public ModelAndView addFixtures(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("current user")!=null) {
+        if (session.getAttribute("current user") != null) {
             User user = (User) session.getAttribute("current user");
             model.addAttribute("role", user.getRole());
             model.addAttribute("teamid", user.getTeamid());
-            return new ModelAndView( "addFixtures");
+            return new ModelAndView("addFixtures");
+        } else {
+            return new ModelAndView(new RedirectView("/"));
+        }
+    }
+
+    @GetMapping(value = "/viewFixtures")
+    public ModelAndView viewFixtures(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("current user") != null) {
+            User user = (User) session.getAttribute("current user");
+            model.addAttribute("role", user.getRole());
+            model.addAttribute("teamid", user.getTeamid());
+            return new ModelAndView("viewFixtures");
         } else {
             return new ModelAndView(new RedirectView("/"));
         }
