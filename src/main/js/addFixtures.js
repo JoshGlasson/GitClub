@@ -156,6 +156,18 @@ constructor(props){
                                })
                              });
                              window.alert("Fixture Added");
+        fetch('/api/calendars', {
+                                       method: 'POST',
+                                       headers: {
+                                         'Accept': 'application/json',
+                                         'Content-Type': 'application/json',
+                                       },
+                                       body: JSON.stringify({
+                                         title: this.state.home + (this.state.training ? ' Training' : ' v ' + this.state.away),
+                                         time: this.state.date + " " + this.state.time + ":00",
+                                         teamid: this.state.teamid,
+                                       })
+                                     });
      }
   };
 

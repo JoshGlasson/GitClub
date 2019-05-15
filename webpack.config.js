@@ -4,7 +4,7 @@ module.exports = {
     entry: {
         landingPage: './src/main/js/app.js',
         addFixturesPage: './src/main/js/addFixtures.js',
-        calendarPage: './src/main/js/calendar.js'
+        calendarPage: './src/main/js/events.js'
     },
     devtool: 'sourcemaps',
     cache: true,
