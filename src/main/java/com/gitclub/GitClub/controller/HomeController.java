@@ -165,7 +165,15 @@ public class HomeController {
     }
 
     @GetMapping(value = "calendar")
-    public String calendar() {
-        return "calendar";
+    public ModelAndView calendar(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("current user")!=null) {
+            User user = (User) session.getAttribute("current user");
+            model.addAttribute("role", user.getRole());
+            model.addAttribute("teamid", user.getTeamid());
+            return new ModelAndView( "calendar");
+        } else {
+            return new ModelAndView(new RedirectView("/"));
+        }
     }
 }

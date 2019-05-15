@@ -117,7 +117,7 @@ constructor(props){
     } else {
         this.setState({ training:true });
     }
-  }
+  };
 
   validateForm(){
   console.log("VALIDATE FORM")
@@ -135,7 +135,7 @@ constructor(props){
           this.addFixture();
       }
   }
-  }
+  };
 
   addFixture(){
   console.log("ADD FIXTURE")
@@ -157,7 +157,7 @@ constructor(props){
                              });
                              window.alert("Fixture Added");
      }
-  }
+  };
 
 }
 

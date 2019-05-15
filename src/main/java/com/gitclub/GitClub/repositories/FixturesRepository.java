@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface FixturesRepository extends CrudRepository<Fixtures, Long> {
     List<Fixtures> findByTeamid(Long teamid);
+    List<Fixtures> getFixtureAndDateByTeamid(Long teamid);
 }

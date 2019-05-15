@@ -4,11 +4,7 @@ class Fixtures extends Component {
     render() {
         return (
             <div>
-
                 <p>| {this.props.item.fixture} | {this.props.item.date} | {this.props.item.location} |</p>
-
-
-
             </div>
         );
     }
