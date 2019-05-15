@@ -8,6 +8,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-inputs-validation": "^2.2.1",
+    "react-popup": "^0.10.0",
     "rest": "^2.0.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1"
