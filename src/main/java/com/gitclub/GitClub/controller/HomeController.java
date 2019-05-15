@@ -30,8 +30,12 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/")
-    public String index() {
-        return "index";
+    public ModelAndView index(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("current user")!=null) {
+            return new ModelAndView( new RedirectView("/landingpage"));
+        }
+        return new ModelAndView( "index");
     }
 
     @GetMapping(value = "/registerTeam")
