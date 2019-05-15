@@ -3,7 +3,8 @@ var path = require('path');
 module.exports = {
     entry: {
         landingPage: './src/main/js/app.js',
-        addFixturesPage: './src/main/js/addFixtures.js'
+        addFixturesPage: './src/main/js/addFixtures.js',
+        calendarPage: './src/main/js/calendar.js'
     },
     devtool: 'sourcemaps',
     cache: true,
@@ -16,7 +17,7 @@ module.exports = {
         rules: [
             {
                 test: path.join(__dirname, '.'),
-                exclude: /(node_modules)/,
+                exclude:/(node_modules)/,
                 loader: 'babel-loader',
                 query: {
                     cacheDirectory: true,

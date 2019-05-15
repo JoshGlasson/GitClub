@@ -163,4 +163,9 @@ public class HomeController {
             return new ModelAndView(new RedirectView("/"));
         }
     }
+
+    @GetMapping(value = "calendar")
+    public String calendar() {
+        return "calendar";
+    }
 }
