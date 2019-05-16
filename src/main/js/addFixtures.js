@@ -148,7 +148,7 @@ constructor(props){
                                },
                                body: JSON.stringify({
                                  fixture: this.state.home + (this.state.training ? ' Training' : ' v ' + this.state.away),
-                                 date: this.state.date + " " + this.state.time + ":00",
+                                 date: this.state.date + "T" + this.state.time + ":00",
                                  location: this.state.location,
                                  season: document.getElementById("season").value,
                                  training: this.state.training,
@@ -164,7 +164,8 @@ constructor(props){
                                        },
                                        body: JSON.stringify({
                                          title: this.state.home + (this.state.training ? ' Training' : ' v ' + this.state.away),
-                                         time: this.state.date + " " + this.state.time + ":00",
+                                         start: this.state.date + " " + this.state.time + ":00",
+                                         color: (this.state.training ? 'red' : 'blue'),
                                          teamid: this.state.teamid,
                                        })
                                      });

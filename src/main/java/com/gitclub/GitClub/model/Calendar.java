@@ -12,8 +12,9 @@ public class Calendar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String time;
     private String title;
+    private String start;
+    private String color;
     private Long teamid;
 
     private Calendar() {
@@ -21,9 +22,10 @@ public class Calendar {
     }
 
 
-    public Calendar(String time, String title, Long teamid) {
-        this.time = time;
+    public Calendar(String start, String title, Long teamid, String color) {
+        this.start = start;
         this.title = title;
+        this.color = color;
         this.teamid = teamid;
     }
 
