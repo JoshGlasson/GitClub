@@ -33,23 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 eventLimit: true, // allow "more" link when too many events
                                                 events: events
                                                 });
-                                                calendar.render();
+                                                calendar.render().updateSize();
                                             });
 });
-
-//[
-//{title: "Josh FC v Other Team", start: "2019-05-22T19:00:00", color: "blue", teamid: 1, _links: {self: {href: "http://localhost:8080/api/calendars/2"}, calendar: {href: "http://localhost:8080/api/calendars/2"}}},
-//{title: "Josh FC Training", start: "2019-05-19T12:00:00", color: "red", teamid: 1, _links: {self: {href: "http://localhost:8080/api/calendars/1"}, calendar: {href: "http://localhost:8080/api/calendars/1"}}},
-//]
-//
-//(fetch('api/calendars/search/findByTeamid?teamid='+ document.getElementById("teamid").value, {
-//                             method: 'GET',
-//                             headers: {
-//                                   'Content-Type': 'application/json',
-//                                   },
-//                             credentials: 'same-origin'
-//                           })
-//                           .then((response) => {return response.json()})
-//                           .then(function(json) {
-//                           console.log(JSON.parse(JSON.stringify(json._embedded.calendars)));
-//                           return JSON.parse(JSON.stringify(json._embedded.calendars))}))
