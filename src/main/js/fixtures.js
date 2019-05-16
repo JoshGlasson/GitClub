@@ -25,7 +25,7 @@ constructor(props){
                                          'Content-Type': 'application/json',
                                        },
                                      })
-                                     location.href = location;
+                                     location.href = self.location.href;
 
 
 
