@@ -31,9 +31,9 @@ constructor(props){
   render() {
     return (
     <div>
-    <h1>Add Match Result</h1>
+    <h4>Add Match Result</h4>
         <div class="form-group">
-           <form onSubmit={this.validateForm} style={{ minWidth:100, maxWidth:500, width:300 }} action="/addResult">
+           <form onSubmit={this.validateForm} style={{ minWidth:100, maxWidth:500, width:160 }} action="/addResult">
               <input type="number" class="form-control" name="home" value={this.state.home} onChange={this.handleInputChange} placeholder="Home Score"></input>
               <input type="number" class="form-control" name="away" value={this.state.away} onChange={this.handleInputChange} placeholder="Away Score"></input>
               <button type="button" class="btn btn-primary" onClick={this.validateForm} >Submit</button>
