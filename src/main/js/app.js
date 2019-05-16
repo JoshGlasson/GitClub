@@ -8,6 +8,8 @@ constructor(props){
     this.state = {
         role: document.getElementById("role").value
     };
+
+
 }
 
   render() {
@@ -26,7 +28,13 @@ constructor(props){
 
     )
   }
+
+
+
 }
+
+
+
 
 ReactDOM.render(
 	<App />,

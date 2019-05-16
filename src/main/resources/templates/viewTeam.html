@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -34,10 +35,33 @@
         </div>
     </nav>
 
+    <button class="open-button" onclick="openForm()">Gitclub FC</button>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div class="chat-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+            <h3>Chat</h3>
+
+            <label for="msg"><b>Message</b></label>
+            <textarea placeholder="Type message.." name="msg" required></textarea>
+            <button type="submit" class="btn" href="/landingpage" > Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
 
     <input type="hidden" id="teamid" th:attr="value=${teamid}">
     <div id="viewTeam"></div>
     <script src="built/viewTeamsPage.js"></script>
+
+    <script>
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+          }
+
+         function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+          }
+    </script>
+
     </body>
 </center>
 </html>
