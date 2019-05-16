@@ -43,6 +43,15 @@ constructor(props){
     )
   }
 
+    getPosts() {
+      return this.props.posts.sort( function(a, b){
+      return new Date(b.time_stamp) - new Date(a.time_stamp);
+      }).map(post =>
+  			<Post key={post._links.self.href} post={post}/>
+
+  		);
+    }
+
 
 }
 

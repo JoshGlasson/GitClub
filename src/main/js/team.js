@@ -10,9 +10,7 @@ constructor(props){
     render() {
         return (
             <div>
-                 <p>| {this.props.item.name} | {this.props.item.position} {this.props.id}|</p>
-               <a href="/viewTeam"><button type="button" class="btn btn-primary" onClick={this.deletePlayer} >Delete</button></a>
-                   {console.log(this.state.userid)}
+                 <p>| {this.props.item.name} | {this.props.item.position} {this.props.id}| <a href="/viewTeam"><button type="button" class="btn btn-primary" onClick={this.deletePlayer} >Delete</button></a></p>
             </div>
         );
 
