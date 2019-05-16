@@ -8,32 +8,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var calendarEl = document.getElementById('calendar');
 
-  var calendar = new Calendar(calendarEl, {
-    schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
-    plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin ],
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-    },
-    defaultDate: new Date(),
-    navLinks: true, // can click day/week names to navigate views
-    editable: true,
-    eventLimit: true, // allow "more" link when too many events
-    events: (fetch('api/calendars/search/findByTeamid?teamid='+ document.getElementById("teamid").value, {
-                                         method: 'GET',
-                                         headers: {
-                                               'Content-Type': 'application/json',
-                                               },
-                                         credentials: 'same-origin'
-                                       })
-                                       .then((response) => {return response.json()})
-                                       .then(function(json) {
-                                       console.log(JSON.parse(JSON.stringify(json._embedded.calendars)));
-                                       return JSON.parse(JSON.stringify(json._embedded.calendars))}))
-    });
+  fetch('api/calendars/search/findByTeamid?teamid='+ document.getElementById("teamid").value, {
+                                              method: 'GET',
+                                              headers: {
+                                                    'Content-Type': 'application/json',
+                                                    },
+                                              credentials: 'same-origin'
+                                            })
+                                            .then((response) => {return response.json()})
+                                            .then(function(json) {
+                                            var events = (JSON.parse(JSON.stringify(json._embedded.calendars)));
 
-  calendar.render();
+                                            var calendar = new Calendar(calendarEl, {
+                                                schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+                                                plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin ],
+                                                header: {
+                                                  left: 'prev,next today',
+                                                  center: 'title',
+                                                  right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                                                },
+                                                defaultDate: new Date(),
+                                                navLinks: true, // can click day/week names to navigate views
+                                                editable: true,
+                                                eventLimit: true, // allow "more" link when too many events
+                                                events: events
+                                                });
+                                                calendar.render();
+                                            });
 });
 
 //[
