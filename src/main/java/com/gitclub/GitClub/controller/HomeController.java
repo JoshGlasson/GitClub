@@ -190,8 +190,4 @@ public class HomeController {
         return new RedirectView("/");
     }
 
-    @GetMapping(value = "/addResult")
-    public String addResult() {
-        return "addResult";
-    }
 }
