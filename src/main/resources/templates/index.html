@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+
 <center>
     <body style="margin-top: auto; margin-bottom: auto;">
     <nav class="navbar navbar-dark bg-primary">
     <div class="form-inline">
-        <a class="navbar-brand" href="/">GitClub</a>
-
+        <a class="navbar-brand" href="/"><i class="fa fa-fw fa-home"></i></a>
         <form class="form-inline" action="#" th:action="@{/user/authentication}" th:object="${user}" method="post">
             <input class="form-control mr-sm-2" type="email" id="email" name="email" required="true" placeholder="email address"/>
             <input class="form-control mr-sm-2" type="password" id="password" name="password" required="true" placeholder="password"/>
