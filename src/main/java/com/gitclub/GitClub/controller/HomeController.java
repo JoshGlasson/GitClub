@@ -175,4 +175,17 @@ public class HomeController {
             return new ModelAndView(new RedirectView("/"));
         }
     }
+
+    @GetMapping(value = "/availability")
+    public ModelAndView availability(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("current user") != null) {
+            User user = (User) session.getAttribute("current user");
+            model.addAttribute("role", user.getRole());
+            model.addAttribute("teamid", user.getTeamid());
+            return new ModelAndView("availability");
+        } else {
+            return new ModelAndView(new RedirectView("/"));
+        }
+    }
 }
