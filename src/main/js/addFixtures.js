@@ -162,14 +162,14 @@ constructor(props){
   console.log("VALIDATE FORM")
   if(this.state.training){
     if(this.state.date === '' || this.state.time === '' || this.state.location === '' || this.state.season === '') {
-          window.alert("Please fill in all the fields")
+          window.alert("Please fill in all the fields. Missing:" + (this.state.date === '' ? '\nDate' : '') + (this.state.time === '' ? '\nTime' : '') + (this.state.location === '' ? '\nLocation' : '') + (this.state.season === '' ? '\nSeason' : ''))
       } else {
            console.log("Add Training")
           this.addFixture();
       }
   } else {
     if(this.state.opponent === '' || this.state.date === '' || this.state.time === '' || this.state.location === '' || this.state.season === '') {
-          window.alert("Please fill in all the fields")
+          window.alert("Please fill in all the fields. Missing:" + (this.state.opponent === '' ? "\nOpponent" : '') + (this.state.date === '' ? "\nDate" : '') + (this.state.time === '' ? '\nTime' : '') + (this.state.location === '' ? '\nLocation' : '') + (this.state.season === '' ? '\nSeason' : ''))
       } else {
           this.addFixture();
       }
