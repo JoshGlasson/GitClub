@@ -5,7 +5,7 @@ module.exports = {
         landingPage: './src/main/js/app.js',
         addFixturesPage: './src/main/js/addFixtures.js',
         viewFixturesPage: './src/main/js/viewFixtures.js',
-        viewTeamsPage: './src/main/js/viewTeam.js'
+        viewTeamsPage: './src/main/js/viewTeam.js',
     },
     devtool: 'sourcemaps',
     cache: true,

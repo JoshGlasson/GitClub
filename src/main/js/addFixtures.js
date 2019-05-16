@@ -20,7 +20,6 @@ constructor(props){
     this.addFixture = this.addFixture.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-//    this.getFixtures = this.getFixtures.bind(this);
 
     fetch('/api/fixtureses/search/findByTeamid?teamid='+ this.state.teamid, {
       method: 'GET',

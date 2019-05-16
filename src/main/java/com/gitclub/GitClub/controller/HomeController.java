@@ -189,4 +189,9 @@ public class HomeController {
         session.setAttribute("teamname", null);
         return new RedirectView("/");
     }
+
+    @GetMapping(value = "/addResult")
+    public String addResult() {
+        return "addResult";
+    }
 }
