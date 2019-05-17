@@ -90,9 +90,8 @@ constructor(props){
            <div id={"collapse"} class="collapse" aria-labelledby={"fixtures"}>
                <div class="card-body">
 
-                   {this.state.fixtures.reverse().map((item, key) =>
-                       <Fixtures item={item} key={item.id} />
-                   )}
+                   {this.state.fixtures.sort( function(a, b){ return (b._links.self.href.split("/")[b._links.self.href.split("/").length-1]) - (a._links.self.href.split("/")[a._links.self.href.split("/").length-1])})
+                    .map((item, key) => <Fixtures item={item} key={item.id} />)}
 
                </div>
            </div>
@@ -220,3 +219,5 @@ ReactDOM.render(
 )
 
 
+// SORT BY DATE
+//{this.state.fixtures.sort( function(a, b){ return new Date(b.date) - new Date(a.date);}).map((item, key) => <Fixtures item={item} key={item.id} />)}
