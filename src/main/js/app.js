@@ -14,6 +14,7 @@ constructor(props){
     let managerView;
       if(this.state.role === "manager"){
         managerView = <a href="/addFixtures">Add Fixtures</a>
+        managerView = <a href="/availability">Availability</a>
       } else {
         managerView = <a href="/viewFixtures">View Fixtures</a>
       }
