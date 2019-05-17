@@ -35,13 +35,12 @@ constructor(props){
     return (
     <div>
     <h1>View Team</h1>
-    {this.state.team.map((item, key) =>
-                           <Team item={item} key={item.id} />
+                {this.state.team.map((item, key) =>
+                        <Team item={item} key={item.id} />
                        )}
     </div>
     )
   }
-
 
 
 }
