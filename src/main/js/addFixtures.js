@@ -75,6 +75,21 @@ constructor(props){
 
   render() {
 
+  const headers =   <thead class="thead-dark">
+                        <tr>
+                            <th>Fixtures</th>
+                            <th>Date</th>
+                            <th>Score</th>
+                            <th>Location</th>
+                            <th>Add Score</th>
+                            <th>Delete Fixture</th>
+                        </tr>
+                    </thead>
+
+
+  const contents = this.state.fixtures.sort( function(a, b){ return (b._links.self.href.split("/")[b._links.self.href.split("/").length-1]) - (a._links.self.href.split("/")[a._links.self.href.split("/").length-1])})
+                                       .map((item, key) => <Fixtures item={item} key={item.id} />)
+
   let fixtureBox;
   fixtureBox =
   <div className='fixtures-item'>
@@ -89,14 +104,16 @@ constructor(props){
 
            <div id={"collapse"} class="collapse" aria-labelledby={"fixtures"}>
                <div class="card-body">
-
-                   {this.state.fixtures.sort( function(a, b){ return (b._links.self.href.split("/")[b._links.self.href.split("/").length-1]) - (a._links.self.href.split("/")[a._links.self.href.split("/").length-1])})
-                    .map((item, key) => <Fixtures item={item} key={item.id} />)}
-
+                   <table class="table table-bordered">
+                       {headers}
+                       {contents}
+                   </table>
                </div>
            </div>
       </div>
   </div>
+
+
 
     return (
     <div>

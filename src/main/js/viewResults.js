@@ -34,7 +34,7 @@ constructor(props){
 
   render() {
 
-  const headers =   <thead class="thead-primary">
+  const headers =   <thead class="thead-dark">
                         <tr>
                             <th>Fixtures</th>
                             <th>Date</th>
@@ -50,7 +50,7 @@ constructor(props){
 
     return (
     <div>
-    <table class="table">
+    <table class="table table-bordered">
         {headers}
         {contents}
     </table>
