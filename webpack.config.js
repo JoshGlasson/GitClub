@@ -6,6 +6,8 @@ module.exports = {
         addFixturesPage: './src/main/js/addFixtures.js',
         viewResultsPage: './src/main/js/viewResults.js',
         viewTeamsPage: './src/main/js/viewTeam.js',
+        viewFixturesPage: './src/main/js/calendar.js'
+
     },
     devtool: 'sourcemaps',
     cache: true,
@@ -28,3 +30,4 @@ module.exports = {
         ]
     }
 };
+

@@ -190,4 +190,16 @@ public class HomeController {
         return new RedirectView("/");
     }
 
+    @GetMapping(value = "/viewFixtures")
+    public ModelAndView calendar(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("current user")!=null) {
+            User user = (User) session.getAttribute("current user");
+            model.addAttribute("role", user.getRole());
+            model.addAttribute("teamid", user.getTeamid());
+            return new ModelAndView( "viewFixtures");
+        } else {
+            return new ModelAndView(new RedirectView("/"));
+        }
+    }
 }
