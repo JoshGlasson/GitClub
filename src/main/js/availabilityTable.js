@@ -10,6 +10,9 @@ class Table extends React.Component {
               user: [],
               userid: null,
               available: false,
+              allFixtures: [],
+              nextFixture: [],
+              nextFixtureID: null,
           }
 
       this.available = this.available.bind(this);
@@ -29,33 +32,45 @@ class Table extends React.Component {
             })
             .then((json) => {
               this.setState({user: json._embedded.users});
-              console.log(this.state.user);
-              console.log(this.state.userid);
-              console.log(this.state.teamid);
-              console.log(this.state.user);
+              console.log(this.state.user)
             });
+
+    fetch('/api/fixtureses/search/findByTeamid?teamid='+ this.state.teamid, {
+             method: 'GET',
+             headers: {
+             'Content-Type': 'application/json',
+             },
+             credentials: 'same-origin'
+             }).then((response) => {
+                  if(response.ok) {
+                    return response.json();
+                  } else {
+                    throw new Error('Server response wasn\'t OK');
+                  }
+                })
+                .then((json) => {
+                var games = [];
+                json._embedded.fixtureses.map((item) => {if(new Date(item.date) - new Date() > 0){
+                                  games.push(item)}})
+                  this.setState({allFixtures: games.sort( function(a, b){ return ((new Date(a.date) - new Date()) - (new Date(b.date) - new Date()))})})
+                  this.setState({nextFixture: this.state.allFixtures[0]})
+                  this.setState({nextFixtureID: this.state.nextFixture._links.self.href.split("/")[this.state.nextFixture._links.self.href.split("/").length-1]})
+                  console.log(this.state.nextFixtureID)
+                });
+
+
+
    }
 
-//   renderTableHeader() {
-//      let header = Object.keys(this.state.user)
-//      return header.map((key, index) => {
-//         return <th key={index}>{key.toUpperCase()}</th>
-//      })
-//   }
 
    renderTableData() {
       return this.state.user.map((key) => {
-        console.log(key)
-//         const {name} = key
          return (
             <tr>
                <td>{key.name}</td>
                <td><input type="checkbox" class="form-check-input" onChange={this.available} name={key._links.self.href.split("/")[key._links.self.href.split("/").length-1]}></input></td>
             </tr>
          )
-         console.log(key)
-         console.log(document.getElementById("available1").value);
-
       })
 
    }
@@ -76,27 +91,27 @@ class Table extends React.Component {
    }
 
     available(event){
-        const target = event.target;
-           const value = target.type === 'checkbox' ? target.checked : target.value;
-           const name = target.name;
+       const target = event.target;
+       const value = target.type === 'checkbox' ? target.checked : target.value;
+       const name = target.name;
 
-           console.log(name)
+       console.log(name)
        if (this.state.available) {
            this.setState({ available:false });
+
        } else {
            this.setState({ available:true });
-//           fetch('/api/availabilities', {
-//                                          method: 'POST',
-//                                          headers: {
-//                                            'Accept': 'application/json',
-//                                            'Content-Type': 'application/json',
-//                                          },
-//                                          body: JSON.stringify({
-//                                            fixtureid:
-//                                            userid:
-//                                          })
-//                                        });
-//                                        window.alert("Fixture Added");
+           fetch('/api/availabilities', {
+                                          method: 'POST',
+                                          headers: {
+                                            'Accept': 'application/json',
+                                            'Content-Type': 'application/json',
+                                          },
+                                          body: JSON.stringify({
+                                            fixtureid: this.state.nextFixtureID,
+                                            userid: name,
+                                          })
+                                        });
        }
      };
 }
