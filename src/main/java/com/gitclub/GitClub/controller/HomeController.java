@@ -155,14 +155,14 @@ public class HomeController {
         }
     }
 
-    @GetMapping(value = "/viewFixtures")
-    public ModelAndView viewFixtures(HttpServletRequest request, Model model) {
+    @GetMapping(value = "/viewResults")
+    public ModelAndView viewResults(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         if (session.getAttribute("current user") != null) {
             User user = (User) session.getAttribute("current user");
             model.addAttribute("role", user.getRole());
             model.addAttribute("teamid", user.getTeamid());
-            return new ModelAndView("viewFixtures");
+            return new ModelAndView("viewResults");
         } else {
             return new ModelAndView(new RedirectView("/"));
         }

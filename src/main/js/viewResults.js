@@ -2,7 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 import Fixtures from './fixtures';
 
-class ViewFixtures extends React.Component {
+class ViewResults extends React.Component {
 
 constructor(props){
     super(props)
@@ -42,22 +42,11 @@ constructor(props){
     </div>
     )
   }
-
-    getPosts() {
-      return this.props.posts.sort( function(a, b){
-      return new Date(b.time_stamp) - new Date(a.time_stamp);
-      }).map(post =>
-  			<Post key={post._links.self.href} post={post}/>
-
-  		);
-    }
-
-
 }
 
 ReactDOM.render(
-	<ViewFixtures />,
-	document.getElementById('viewFixtures')
+	<ViewResults />,
+	document.getElementById('viewResults')
 )
 
 

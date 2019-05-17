@@ -4,7 +4,7 @@ module.exports = {
     entry: {
         landingPage: './src/main/js/app.js',
         addFixturesPage: './src/main/js/addFixtures.js',
-        viewFixturesPage: './src/main/js/viewFixtures.js',
+        viewResultsPage: './src/main/js/viewResults.js',
         viewTeamsPage: './src/main/js/viewTeam.js',
     },
     devtool: 'sourcemaps',
