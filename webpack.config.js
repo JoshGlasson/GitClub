@@ -4,10 +4,11 @@ module.exports = {
     entry: {
         landingPage: './src/main/js/app.js',
         addFixturesPage: './src/main/js/addFixtures.js',
+
         viewResultsPage: './src/main/js/viewResults.js',
         viewTeamsPage: './src/main/js/viewTeam.js',
-        viewFixturesPage: './src/main/js/calendar.js'
-
+        viewFixturesPage: './src/main/js/calendar.js',
+        availabilityPage: './src/main/js/availabilityTable.js'
     },
     devtool: 'sourcemaps',
     cache: true,
@@ -26,7 +27,21 @@ module.exports = {
                     cacheDirectory: true,
                     presets: ['es2015', 'react']
                 }
-            }
+            },
+             {
+               test: /\.css$/,
+               use: ['style-loader', 'css-loader'],
+             },
+            {
+                test: /\.(png|jpe?g|gif)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {},
+                  },
+                ],
+              },
+
         ]
     }
 };
