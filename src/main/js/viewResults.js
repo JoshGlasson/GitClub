@@ -36,8 +36,7 @@ constructor(props){
     return (
     <div>
     <h1>Fixtures</h1>
-    {this.state.fixtures.sort( function(a, b){ return (b._links.self.href.split("/")[b._links.self.href.split("/").length-1]) - (a._links.self.href.split("/")[a._links.self.href.split("/").length-1])})
-                        .map((item, key) => <Fixtures item={item} key={item.id} />)}
+    {this.state.fixtures.sort( function(a, b){ return new Date(a.date) - new Date(b.date);}).map((item, key) => <Fixtures item={item} key={item.id} />)}
     </div>
     )
   }
