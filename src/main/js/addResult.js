@@ -31,12 +31,11 @@ constructor(props){
   render() {
     return (
     <div>
-    <h4>Add Match Result</h4>
-        <div class="form-group">
-           <form onSubmit={this.validateForm} style={{ minWidth:100, maxWidth:500, width:160 }} action="/addResult">
-              <input type="number" class="form-control" name="home" value={this.state.home} onChange={this.handleInputChange} placeholder="Home Score"></input>
-              <input type="number" class="form-control" name="away" value={this.state.away} onChange={this.handleInputChange} placeholder="Away Score"></input>
-              <button type="button" class="btn btn-primary" onClick={this.validateForm} >Submit</button>
+        <div class="form-inline">
+           <form class="form-inline" onSubmit={this.validateForm} style={{ minWidth:100, maxWidth:50, width:100 }} action="/addResult">
+              <input style={{ minWidth:50, maxWidth:100, width:80 }} type="number" class="form-group mb-2" name="home" value={this.state.home} onChange={this.handleInputChange} placeholder="Home"></input>
+              <input style={{ minWidth:50, maxWidth:100, width:80 }} type="number" class="form-group mb-2" name="away" value={this.state.away} onChange={this.handleInputChange} placeholder="Away"></input>
+              <button type="button" class="btn btn-primary form-inline" onClick={this.validateForm}>Submit</button>
            </form>
         </div>
     </div>

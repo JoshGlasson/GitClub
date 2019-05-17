@@ -4,17 +4,24 @@ import AddResult from './addResult';
 class Fixtures extends Component {
 constructor(props){
     super(props);
-    this.state = {fixtureid: this.props.item._links.self.href.split("/")[this.props.item._links.self.href.split("/").length-1], showCompnent:false };
+    this.state = {fixtureid: this.props.item._links.self.href.split("/")[this.props.item._links.self.href.split("/").length-1], showComponent:false };
     this.deleteFixture = this.deleteFixture.bind(this);
     this.addResult = this.addResult.bind(this);
     this.prettyDate = this.prettyDate.bind(this);
     this.prettyTime = this.prettyTime.bind(this);
+    this.cancelAddResult = this.cancelAddResult.bind(this);
 }
 
     render() {
         return (
-             <p>| {this.props.item.fixture} | {this.prettyDate(this.props.item.date)} | {this.props.item.location} | {(this.props.item.result === null ? this.prettyTime(this.props.item.date) : this.props.item.result)} | <button type="button" class="btn btn-primary" onClick={this.deleteFixture} >Delete</button>
-             <button type="button" class="btn btn-primary" onClick={this.addResult} >Add Result</button>{this.state.showCompnent ?  <AddResult item={this.state.fixtureid}/> : null}</p>
+        <tbody>
+          <td>{this.props.item.fixture}</td>
+          <td>{this.prettyDate(this.props.item.date)}</td>
+          <td>{(this.props.item.result === null ? this.prettyTime(this.props.item.date) : this.props.item.result)}</td>
+          <td>{this.props.item.location}</td>
+          <td>{this.state.showComponent ?  <div class="form-inline"><AddResult item={this.state.fixtureid}/> <a style={{ color:"blue" }} onClick={this.cancelAddResult}>Cancel</a></div> : <a style={{ color:"blue" }} onClick={this.addResult}>Add Result</a>}</td>
+          <td><a style={{ color:"blue" }} onClick={this.deleteFixture}>Delete</a></td>
+        </tbody>
          )
     };
 
@@ -59,9 +66,14 @@ constructor(props){
                    };
 
          addResult(){
-            this.setState({showCompnent:true})
+            this.setState({showComponent:true})
 
          }
+
+         cancelAddResult(){
+                     this.setState({showComponent:false})
+
+                  }
 }
 
 export default Fixtures;
