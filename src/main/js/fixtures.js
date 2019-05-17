@@ -10,6 +10,7 @@ constructor(props){
     this.prettyDate = this.prettyDate.bind(this);
     this.prettyTime = this.prettyTime.bind(this);
     this.cancelAddResult = this.cancelAddResult.bind(this);
+
 }
 
     render() {
@@ -19,11 +20,12 @@ constructor(props){
           <td>{this.prettyDate(this.props.item.date)}</td>
           <td>{(this.props.item.result === null ? this.prettyTime(this.props.item.date) : this.props.item.result)}</td>
           <td>{this.props.item.location}</td>
-          <td>{this.state.showComponent ?  <div class="form-inline"><AddResult item={this.state.fixtureid}/> <a style={{ color:"blue" }} onClick={this.cancelAddResult}>Cancel</a></div> : <a style={{ color:"blue" }} onClick={this.addResult}>Add Result</a>}</td>
-          <td><a style={{ color:"blue" }} onClick={this.deleteFixture}>Delete</a></td>
+          <td>{this.state.showComponent ?  <div><AddResult item={this.state.fixtureid}/><button type="button" class="btn btn-danger form-inline btn-sm" onClick={this.cancelAddResult}>Cancel</button></div> : <button type="button" class="btn btn-success" onClick={this.addResult}>Add Result</button>}</td>
+          <td><button class="btn btn-danger" onClick={this.deleteFixture}>Delete</button></td>
         </tbody>
          )
     };
+
 
 
     prettyDate(value){

@@ -31,11 +31,11 @@ constructor(props){
   render() {
     return (
     <div>
-        <div class="form-inline">
-           <form class="form-inline" onSubmit={this.validateForm} style={{ minWidth:100, maxWidth:50, width:100 }} action="/addResult">
-              <input style={{ minWidth:50, maxWidth:100, width:80 }} type="number" class="form-group mb-2" name="home" value={this.state.home} onChange={this.handleInputChange} placeholder="Home"></input>
-              <input style={{ minWidth:50, maxWidth:100, width:80 }} type="number" class="form-group mb-2" name="away" value={this.state.away} onChange={this.handleInputChange} placeholder="Away"></input>
-              <button type="button" class="btn btn-primary form-inline" onClick={this.validateForm}>Submit</button>
+        <div>
+           <form class="form-inline" onSubmit={this.validateForm} style={{ display: 'inline-block', width:200}}>
+              <input style={{ minWidth:50, maxWidth:100, width:80, fontSize:10 }} type="number" class="form-control mr-sm-2" name="home" value={this.state.home} onChange={this.handleInputChange} placeholder="Home"></input>
+              <input style={{ minWidth:50, maxWidth:100, width:80, fontSize:10 }} type="number" class="form-control mr-sm-2" name="away" value={this.state.away} onChange={this.handleInputChange} placeholder="Away"></input>
+              <button type="button" class="btn btn-primary form-inline btn-sm" onClick={this.validateForm}>Submit</button>
            </form>
         </div>
     </div>
