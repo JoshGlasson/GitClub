@@ -1,10 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 import './availabilityTable.css';
-import { MDBInput, MDBFormInline } from 'mdbreact';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import './react-bootstrap-table-all.min.css';
-
 
 class Table extends React.Component {
    constructor(props) {
@@ -34,30 +30,34 @@ class Table extends React.Component {
             .then((json) => {
               this.setState({user: json._embedded.users});
               console.log(this.state.user);
-              this.setState({userid: json._embedded.users._links.self.href.split("/")[json._embedded.users._links.self.href.split("/").length-1] });
-                console.log(this.state.userid);
+              console.log(this.state.userid);
               console.log(this.state.teamid);
               console.log(this.state.user);
             });
    }
 
 //   renderTableHeader() {
-//      let header = Object.keys(this.state.team[])
+//      let header = Object.keys(this.state.user)
 //      return header.map((key, index) => {
 //         return <th key={index}>{key.toUpperCase()}</th>
 //      })
 //   }
 
    renderTableData() {
-      return this.state.user.map((key, index) => {
-         const {name} = key
+      return this.state.user.map((key) => {
+        console.log(key)
+//         const {name} = key
          return (
-            <tr key={name, availability}>
-               <td>{name}</td>
-               <td><input type="checkbox" class="form-check-input" onClick={this.available} name="available" name="available" value="available"></input></td>
+            <tr>
+               <td>{key.name}</td>
+               <td><input type="checkbox" class="form-check-input" onChange={this.available} name={key._links.self.href.split("/")[key._links.self.href.split("/").length-1]}></input></td>
             </tr>
          )
+         console.log(key)
+         console.log(document.getElementById("available1").value);
+
       })
+
    }
 
    render() {
@@ -75,7 +75,12 @@ class Table extends React.Component {
       )
    }
 
-    available(){
+    available(event){
+        const target = event.target;
+           const value = target.type === 'checkbox' ? target.checked : target.value;
+           const name = target.name;
+
+           console.log(name)
        if (this.state.available) {
            this.setState({ available:false });
        } else {
