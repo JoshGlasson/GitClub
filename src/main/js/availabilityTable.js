@@ -91,29 +91,52 @@ class Table extends React.Component {
    }
 
     available(event){
-       const target = event.target;
-       const value = target.type === 'checkbox' ? target.checked : target.value;
-       const name = target.name;
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+      console.log(target.checked)
+      console.log(name)
 
-       console.log(name)
-       if (this.state.available) {
-           this.setState({ available:false });
-
-       } else {
-           this.setState({ available:true });
-           fetch('/api/availabilities', {
-                                          method: 'POST',
-                                          headers: {
-                                            'Accept': 'application/json',
-                                            'Content-Type': 'application/json',
-                                          },
-                                          body: JSON.stringify({
-                                            fixtureid: this.state.nextFixtureID,
-                                            userid: name,
-                                          })
-                                        });
+      if (target.checked) {
+          console.log("ADD TO DB")
+          fetch('/api/availabilities', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              fixtureid: this.state.nextFixtureID,
+              userid: name,
+            })
+          });
+      } else {
+          console.log("DELETE FROM DB")
+          fetch('/api/availabilities/search/findByFixtureidAndUserid?fixtureid='+ this.state.nextFixtureID +'&userid='+ name, {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin'
+                }).then((response) => {
+                     if(response.ok) {
+                       return response.json();
+                     } else {
+                       throw new Error('Server response wasn\'t OK');
+                     }
+                   })
+                   .then((json) => {
+                     var availabilityID = (json._embedded.availabilities[0]._links.self.href.split("/")[json._embedded.availabilities[0]._links.self.href.split("/").length-1]);
+                     fetch('/api/availabilities/'+ availabilityID, {
+                                                    method: 'DELETE',
+                                                    headers: {
+                                                      'Accept': 'application/json',
+                                                      'Content-Type': 'application/json',
+                                                    },
+                                                  });
+                   });
        }
-     };
+    };
 }
 
 
