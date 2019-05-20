@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+import WeatherApp from "./weatherApp.js";
 
 
 class App extends React.Component {
@@ -26,17 +27,15 @@ constructor(props){
     <div>
         <h1>"Hello"</h1>
         {managerView}
+        <WeatherApp />
+
     </div>
 
     )
   }
 
 
-
 }
-
-
-
 
 ReactDOM.render(
 	<App />,

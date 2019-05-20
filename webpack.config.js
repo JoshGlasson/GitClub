@@ -10,6 +10,7 @@ module.exports = {
         availabilityPage: './src/main/js/availabilityTable.js',
         nextTwoFixturesPage: './src/main/js/nextTwoFixtures.js',
         teamSheetPage: './src/main/js/teamSheet.js'
+
     },
     devtool: 'sourcemaps',
     cache: true,
