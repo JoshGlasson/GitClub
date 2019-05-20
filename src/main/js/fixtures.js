@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import AddResult from './addResult';
 
 class Fixtures extends Component {
 constructor(props){

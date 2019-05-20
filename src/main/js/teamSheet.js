@@ -1,13 +1,14 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 import GetTeamSheet from './getTeamSheet';
+import Availability from './availability';
 
 class TeamSheet extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
               teamid: document.getElementById("teamid").value,
-              currentUser: document.getElementById("current_user").value,
+              currentUser: null,
               user: [],
               userid: null,
               available: false,
@@ -16,6 +17,23 @@ class TeamSheet extends React.Component {
               nextFixtureID: null,
               players: [],
           }
+
+     fetch('/api/users/'+ document.getElementById("current_user").value, {
+                                  method: 'GET',
+                                  headers: {
+                                  'Content-Type': 'application/json',
+                                  },
+                                  credentials: 'same-origin'
+                                  }).then((response) => {
+                                       if(response.ok) {
+                                         return response.json();
+                                       } else {
+                                         throw new Error('Server response wasn\'t OK');
+                                       }
+                                     })
+                                     .then((json) => {
+                                     this.setState({currentUser: json})
+                                  });
 
     fetch('/api/fixtureses/search/findByTeamid?teamid='+ this.state.teamid, {
              method: 'GET',
@@ -72,7 +90,18 @@ class TeamSheet extends React.Component {
 
         const content = (this.state.nextFixtureID === null ? <h1>Loading...</h1> : this.state.players.map((item) => <GetTeamSheet item={item}/>))
 
+        const availabilityHeader = <thead class="thead-dark">
+                                 <tr>
+                                    <th>Player</th>
+                                    <th>Available?</th>
+                                 </tr>
+                              </thead>
+
+
+        const availabilityContent = (this.state.currentUser === null ? <h1>Loading...</h1> : <Availability item={this.state.currentUser} team={this.state.teamid}/>)
+
         console.log(this.state.currentUser)
+
 
 
     return (
@@ -81,6 +110,11 @@ class TeamSheet extends React.Component {
     <table class="table table-bordered">
         {headers}
         {content}
+    </table>
+
+    <table class="table table-bordered">
+        {availabilityHeader}
+        {availabilityContent}
     </table>
 
     </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Table from './availabilityTable';
+const ReactDOM = require('react-dom');
 
 class Availability extends Component {
 constructor(props){
@@ -89,6 +89,9 @@ constructor(props){
               userid: this.state.userid,
             })
           });
+          if(window.location.href.indexOf('landingpage')){
+          location.href = self.location.href;
+          };
       } else {
           console.log("DELETE FROM DB")
           fetch('/api/availabilities/search/findByFixtureidAndUserid?fixtureid='+ this.state.nextFixtureID +'&userid='+ this.state.userid, {
@@ -114,6 +117,9 @@ constructor(props){
                                                     },
                                                   });
                    });
+                   if(window.location.href.indexOf('landingpage')){
+                     location.href = self.location.href;
+                   };
        }
     };
 }
