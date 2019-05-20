@@ -135,6 +135,7 @@ public class HomeController {
             User user = (User) session.getAttribute("current user");
             model.addAttribute("role", user.getRole());
             model.addAttribute("teamid", user.getTeamid());
+            model.addAttribute("current_user", user);
             return new ModelAndView("landingPage");
         } else {
             return new ModelAndView(new RedirectView("/"));

@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "USERS")
 public class User {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -81,5 +82,8 @@ public class User {
         this.position = position;
     }
 
+    public Long getId() {
+        return id;
+    }
 }
 

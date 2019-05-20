@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Table from './availabilityTable';
+
 
 class Availability extends Component {
 constructor(props){
