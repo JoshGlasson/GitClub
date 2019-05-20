@@ -100,10 +100,6 @@ class TeamSheet extends React.Component {
 
         const availabilityContent = (this.state.currentUser === null ? <h1>Loading...</h1> : <Availability item={this.state.currentUser} team={this.state.teamid}/>)
 
-        console.log(this.state.currentUser)
-
-
-
     return (
     <div>
     <h1>Team Sheet for Next Game</h1>
