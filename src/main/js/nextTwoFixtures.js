@@ -1,6 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 import Fixtures from './fixtures';
+import WeatherApp from "./weatherApp.js";
 
 class NextTwoFixtures extends React.Component {
    constructor(props) {
@@ -12,6 +13,7 @@ class NextTwoFixtures extends React.Component {
               available: false,
               allFixtures: [],
               nextFixtures: [],
+              nextFixture: [],
           }
 
 
@@ -52,6 +54,8 @@ class NextTwoFixtures extends React.Component {
                                   games.push(item)}})
                   this.setState({allFixtures: games.sort( function(a, b){ return ((new Date(a.date) - new Date()) - (new Date(b.date) - new Date()))})})
                   console.log(this.state.allFixtures)
+                  this.setState({nextFixture: this.state.allFixtures[0]})
+                  console.log(this.state.nextFixture)
                   var twoGames = [];
                   twoGames.push(this.state.allFixtures[0]);
                   twoGames.push(this.state.allFixtures[1]);
@@ -80,7 +84,7 @@ class NextTwoFixtures extends React.Component {
         const contents = this.state.nextFixtures.sort( function(a, b){ return (a._links.self.href.split("/")[a._links.self.href.split("/").length-1]) - (b._links.self.href.split("/")[b._links.self.href.split("/").length-1])})
                                        .map((item, key) => <Fixtures item={item} key={item.id} />)
 
-
+        const weather = (this.state.nextFixture === [] ? <h3>Loading Weather...</h3> : <WeatherApp item={this.state.nextFixture} />)
 
     return (
     <div>
@@ -89,6 +93,7 @@ class NextTwoFixtures extends React.Component {
         {headers}
         {contents}
     </table>
+    {weather}
     </div>
     )
   }
