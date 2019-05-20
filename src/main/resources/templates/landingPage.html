@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="main.css">
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid/main.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/list/main.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+  #calendar {
+    max-width: 800px;
+    max-height: 800px;
+    margin: 0 auto;
+  }
+</style>
 </head>
 <center>
     <body style="margin-top: auto; margin-bottom: auto;">
+    <input type="hidden" id="role" th:attr="value=${role}">
+    <input type="hidden" id="teamid" th:attr="value=${teamid}">
     <nav class="navbar navbar-expand-md navbar-dark bg-primary">
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
@@ -37,6 +50,37 @@
             </ul>
         </div>
     </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" id='calendar' style="padding: 50px; margin:auto">
+                <script src='built/viewFixturesPage.js'></script>
+                <div th:if="${role == 'manager'}">
+                    <a href="/addFixtures">Add Fixtures</a>
+                </div>
+            </div>
+
+            <div class="col-md-6" style="padding: 50px">
+                <h1 th:text="${role}"></h1>
+                <h1 style="display:inline;">Your TeamID: </h1> <h1 style="display:inline;" th:text="${teamid}"></h1>
+                <div id="landingPage"></div>
+                <script src="built/landingPage.js"></script>
+            </div>
+
+            <div class="w-100"></div>
+            <div class="col-md-6" style="padding: 50px">
+                <div id="nextTwoFixtures"></div>
+                <script src="built/nextTwoFixturesPage.js"></script>
+            </div>
+
+            <div class="col-md-6" style="padding: 50px">
+                <div id="teamSheet"></div>
+                <script src="built/teamSheetPage.js"></script>
+            </div>
+
+        </div>
+    </div>
+
     <button class="open-button" onclick="openForm()">Chat</button>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <div class="chat-popup" id="myForm">
@@ -50,14 +94,6 @@
         </form>
     </div>
 
-    <input type="hidden" id="role" th:attr="value=${role}">
-    <h1 th:text="${role}"></h1>
-
-    <input type="hidden" id="teamid" th:attr="value=${teamid}">
-    <h1 style="display:inline;">Your TeamID: </h1> <h1 style="display:inline;" th:text="${teamid}"></h1>
-
-    <div id="landingPage"></div>
-    <script src="built/landingPage.js"></script>
 
     <script>
         function openForm() {

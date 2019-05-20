@@ -8,7 +8,9 @@ module.exports = {
         viewResultsPage: './src/main/js/viewResults.js',
         viewTeamsPage: './src/main/js/viewTeam.js',
         viewFixturesPage: './src/main/js/calendar.js',
-        availabilityPage: './src/main/js/availabilityTable.js'
+        availabilityPage: './src/main/js/availabilityTable.js',
+        nextTwoFixturesPage: './src/main/js/nextTwoFixtures.js',
+        teamSheetPage: './src/main/js/teamSheet.js'
     },
     devtool: 'sourcemaps',
     cache: true,

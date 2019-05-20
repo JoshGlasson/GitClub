@@ -33,6 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 eventLimit: true, // allow "more" link when too many events
                                                 events: events
                                                 });
-                                                calendar.render().updateSize();
+                                                calendar.render();
                                             });
 });
