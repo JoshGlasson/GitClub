@@ -92,9 +92,10 @@ class TeamSheet extends React.Component {
                           </thead>
 
 
-        const contents = (this.state.players === [] ? null : this.state.players.map((item) => <td>{item.name}</td>))
+        const contents = (this.state.players === [] ? null : this.state.players.map((item) => <td>{item}</td>))
+        console.log(contents)
 
-        const table = (contents === null ? <h1>Loading...</h1> : <table class="table table-bordered">{headers}{contents}</table>)
+        const table = (contents === null ? <h1>Loading...</h1> : <table class="table table-bordered">{headers}<tbody>{contents}</tbody></table>)
 
     return (
     <div>
