@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import TeamSheet from './teamSheet';
 
 class GetTeamSheet extends Component {
 constructor(props){

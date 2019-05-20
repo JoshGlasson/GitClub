@@ -4,7 +4,6 @@ module.exports = {
     entry: {
         landingPage: './src/main/js/app.js',
         addFixturesPage: './src/main/js/addFixtures.js',
-
         viewResultsPage: './src/main/js/viewResults.js',
         viewTeamsPage: './src/main/js/viewTeam.js',
         viewFixturesPage: './src/main/js/calendar.js',
