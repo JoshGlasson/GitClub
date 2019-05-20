@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-import './availabilityTable.css';
+import Availability from './availability';
 
 class Table extends React.Component {
    constructor(props) {
@@ -14,8 +14,9 @@ class Table extends React.Component {
               nextFixture: [],
               nextFixtureID: null,
           }
+      this.prettyDate = this.prettyDate.bind(this);
+      this.prettyTime = this.prettyTime.bind(this);
 
-      this.available = this.available.bind(this);
 
    fetch('/api/users/search/findByTeamid?teamid='+ this.state.teamid, {
          method: 'GET',
@@ -62,81 +63,53 @@ class Table extends React.Component {
 
    }
 
-
-   renderTableData() {
-      return this.state.user.map((key) => {
-         return (
-            <tr>
-               <td>{key.name}</td>
-               <td><input type="checkbox" class="form-check-input" onChange={this.available} name={key._links.self.href.split("/")[key._links.self.href.split("/").length-1]}></input></td>
-            </tr>
-         )
-      })
-
-   }
-
    render() {
+
+   const headers =   <thead class="thead-dark">
+                           <tr>
+                               <th>Player</th>
+                               <th>{this.state.nextFixture.fixture + ' - ' + this.prettyDate(this.state.nextFixture.date) + ' ' + this.prettyTime(this.state.nextFixture.date)}</th>
+                           </tr>
+                       </thead>
+
+
+   const contents = this.state.user.map((item, key) => <Availability item={item} team={this.state.teamid} />)
+
       return (
          <div>
             <h1 id='title'> Team Availability</h1>
-            <table id='players'>
-               <tbody>
-
-                  {this.renderTableData()}
-
-               </tbody>
-            </table>
+            <table class="table table-bordered">
+               {headers}
+               {contents}
+           </table>
          </div>
       )
    }
 
-    available(event){
-      const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-      const name = target.name;
-      console.log(target.checked)
-      console.log(name)
+   prettyDate(value){
+          var monthNames = [
+              "January", "February", "March",
+              "April", "May", "June", "July",
+              "August", "September", "October",
+              "November", "December"
+           ];
 
-      if (target.checked) {
-          console.log("ADD TO DB")
-          fetch('/api/availabilities', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              fixtureid: this.state.nextFixtureID,
-              userid: name,
-            })
-          });
-      } else {
-          console.log("DELETE FROM DB")
-          fetch('/api/availabilities/search/findByFixtureidAndUserid?fixtureid='+ this.state.nextFixtureID +'&userid='+ name, {
-                method: 'GET',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-                credentials: 'same-origin'
-                }).then((response) => {
-                     if(response.ok) {
-                       return response.json();
-                     } else {
-                       throw new Error('Server response wasn\'t OK');
-                     }
-                   })
-                   .then((json) => {
-                     var availabilityID = (json._embedded.availabilities[0]._links.self.href.split("/")[json._embedded.availabilities[0]._links.self.href.split("/").length-1]);
-                     fetch('/api/availabilities/'+ availabilityID, {
-                                                    method: 'DELETE',
-                                                    headers: {
-                                                      'Accept': 'application/json',
-                                                      'Content-Type': 'application/json',
-                                                    },
-                                                  });
-                   });
+           var fulldate = new Date(value)
+           var day = (fulldate.getDate() > 9 ? fulldate.getDate() : '0'+fulldate.getDate())
+           var month = fulldate.getMonth()
+           var year = fulldate.getFullYear()
+           return (day+"-"+monthNames[month]+"-"+year)
        }
-    };
+
+
+       prettyTime(value){
+           var fulldate = new Date(value)
+           var hour = (fulldate.getHours() > 9 ? fulldate.getHours() : '0' + fulldate.getHours())
+           var minutes = (fulldate.getMinutes() > 9 ? fulldate.getMinutes() : '0' + fulldate.getMinutes())
+           var seconds = (fulldate.getSeconds() > 9 ? fulldate.getSeconds() : '0' + fulldate.getSeconds())
+           return (hour+":"+minutes+":"+seconds)
+       }
+
 }
 
 
