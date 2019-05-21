@@ -62,7 +62,7 @@ constructor(props){
 
     return (
     <div>
-    <table class="table table-bordered">
+    <table class="table table-bordered" style={{ width:1000, maxWidth:1400 }}>
         {headers}
         {contents}
     </table>

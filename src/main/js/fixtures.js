@@ -14,7 +14,6 @@ constructor(props){
 }
 
     render() {
-
     if(this.state.role === 'manager'){
     return (
             <tbody>
@@ -36,9 +35,6 @@ constructor(props){
             </tbody>
              )
     }
-
-
-
     };
 
 

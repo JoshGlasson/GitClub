@@ -102,7 +102,7 @@ class NextTwoFixtures extends React.Component {
 
     return (
     <div>
-    <table class="table table-bordered" style={{width:550}}>
+    <table class="table table-bordered" style={{ width:750, maxWidth:1000 }}>
         {headers}
         {contents}
     </table>

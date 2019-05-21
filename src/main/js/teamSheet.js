@@ -102,12 +102,12 @@ class TeamSheet extends React.Component {
 
     return (
     <div>
-    <table class="table table-bordered">
+    <table class="table table-bordered" style={{ width:400, maxWidth:800 }}>
         {headers}
         {content}
     </table>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" style={{ width:400, maxWidth:800 }}>
         {availabilityHeader}
         {availabilityContent}
     </table>
