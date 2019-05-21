@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 const ReactDOM = require('react-dom');
 import Weather from "./weather.js";
 import GoogleApiWrapper from "./map.js";
-
+import MyMap from "./leafletMap.js";
 
 const Api_Key = "8d2de98e089f1c28e1a22fc19a24ef04";
 
@@ -78,12 +78,12 @@ console.log(this.props.item)
   const icon = (this.state.weatherId === undefined ? null : <img src={'https://openweathermap.org/img/w/'+this.state.weatherId+'.png'} alt="Weather Icon"/>)
   const weather = (this.props.item === null ? <h1>Loading Weather...</h1> : <Weather temperature={this.state.temperature} city={this.state.city} country={this.state.country} humidity={this.state.humidity} description={this.state.description} error={this.state.error} />)
   const map = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <GoogleApiWrapper lat={this.state.lat} lng={this.state.lon} />)
-
+  const lmap = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <MyMap lat={this.state.lat} lng={this.state.lon} loc={this.props.item} />)
       return(
         <div>
           {icon}
           {weather}
-          {map}
+          {lmap}
         </div>
       )
     };
