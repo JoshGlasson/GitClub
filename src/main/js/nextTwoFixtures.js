@@ -58,7 +58,7 @@ class NextTwoFixtures extends React.Component {
                   console.log(this.state.nextFixture)
                   var twoGames = [];
                   twoGames.push(this.state.allFixtures[0]);
-                  twoGames.push(this.state.allFixtures[1]);
+                  (this.state.allFixtures[1] === undefined ? null : twoGames.push(this.state.allFixtures[1]));
                   this.setState({nextFixtures: twoGames})
                   console.log(this.state.nextFixtures)
                 });
@@ -84,18 +84,14 @@ class NextTwoFixtures extends React.Component {
         const contents = this.state.nextFixtures.sort( function(a, b){ return ((new Date(a.date) - new Date()) - (new Date(b.date) - new Date()))})
                                        .map((item, key) => <Fixtures item={item} key={item.id} />)
 
-
-
         const location = (this.state.nextFixture.location !== undefined ? this.state.nextFixture.location : null)
 
         console.log(location)
 
         const weather = (location !== null ? <WeatherApp item={location} /> : <h3>Loading Weather...</h3>)
 
-
     return (
     <div>
-    <h1>Next Two Fixtures</h1>
     <table class="table table-bordered" style={{width:550}}>
         {headers}
         {contents}

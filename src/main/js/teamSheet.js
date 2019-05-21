@@ -88,7 +88,7 @@ class TeamSheet extends React.Component {
                              </tr>
                           </thead>
 
-        const content = (this.state.nextFixtureID === null ? <h1>Loading...</h1> : this.state.players.map((item) => <GetTeamSheet item={item}/>))
+        const content = (this.state.nextFixtureID === null ? <p>No Fixtures</p> : this.state.players.map((item) => <GetTeamSheet item={item}/>))
 
         const availabilityHeader = <thead class="thead-dark">
                                  <tr>
@@ -98,11 +98,10 @@ class TeamSheet extends React.Component {
                               </thead>
 
 
-        const availabilityContent = (this.state.currentUser === null ? <h1>Loading...</h1> : <Availability item={this.state.currentUser} team={this.state.teamid}/>)
+        const availabilityContent = (this.state.currentUser === null ? <p>None</p> : <Availability item={this.state.currentUser} team={this.state.teamid}/>)
 
     return (
     <div>
-    <h1>Team Sheet for Next Game</h1>
     <table class="table table-bordered">
         {headers}
         {content}
