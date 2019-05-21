@@ -1,11 +1,13 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 import Fixtures from './fixtures';
+import Button from 'react-bootstrap/Button';
+import Fade from 'react-bootstrap/Fade'
 
 class AddFixtures extends React.Component {
 
-constructor(props){
-    super(props)
+constructor(props, context){
+    super(props, context)
     this.state = {
         training: false,
         teamid: document.getElementById("teamid").value,
@@ -18,6 +20,7 @@ constructor(props){
         teamname: null,
         homeCheck: true,
         role: document.getElementById("role").value,
+        open: false,
     };
     this.training = this.training.bind(this);
     this.addFixture = this.addFixture.bind(this);
@@ -99,31 +102,18 @@ constructor(props){
   const headers = (this.state.role === 'manager' ? managerHeaders : playerHeaders)
 
 
-  const contents = this.state.fixtures.sort( function(a, b){ return (b._links.self.href.split("/")[b._links.self.href.split("/").length-1]) - (a._links.self.href.split("/")[a._links.self.href.split("/").length-1])})
-                                       .map((item, key) => <Fixtures item={item} key={item.id} />)
+  const contents = (this.state.fixtures === [] ? null : this.state.fixtures.sort( function(a, b){ return (b._links.self.href.split("/")[b._links.self.href.split("/").length-1]) - (a._links.self.href.split("/")[a._links.self.href.split("/").length-1])})
+                                       .map((item, key) => <Fixtures item={item} key={item.id} />))
 
-  let fixtureBox;
-  fixtureBox =
-  <div className='fixtures-item'>
-      <div class="card">
-           <div class="card-header" id={"fixtures"}>
-               <h2 class="mb-0">
-                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target={"#collapse"} aria-expanded="true" aria-controls={"collapse"}>
-                       <h5>View Fixtures</h5>
-                   </button>
-               </h2>
-           </div>
-
-           <div id={"collapse"} class="collapse" aria-labelledby={"fixtures"}>
-               <div class="card-body">
-                   <table class="table table-bordered">
-                       {headers}
-                       {contents}
-                   </table>
-               </div>
-           </div>
+  const fixtureBox =
+    <Fade in={this.state.open}>
+      <div id="example-collapse-text">
+       <table class="table table-bordered">
+           {headers}
+           {contents}
+       </table>
       </div>
-  </div>
+    </Fade>
 
 
 
@@ -163,7 +153,11 @@ constructor(props){
        </form>
     </div>
 
+    <Button class="btn btn-outline-dark" style={{paddingBottom:"10px"}} onClick={() => this.setState({open: !this.state.open })} aria-controls="example-collapse-text" aria-expanded={this.state.open}>{(this.state.open? 'Hide' : 'View')+' Fixtures'}</Button>
+    <br/>
+    <div>
     {fixtureBox}
+    </div>
 
     </div>
     )
