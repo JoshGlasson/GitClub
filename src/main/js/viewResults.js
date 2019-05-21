@@ -62,6 +62,7 @@ constructor(props){
 
     return (
     <div>
+    <h1>Results and Upcoming Fixtures</h1>
     <table class="table table-bordered" style={{ width:1000, maxWidth:1400 }}>
         {headers}
         {contents}

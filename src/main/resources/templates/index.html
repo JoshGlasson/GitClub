@@ -10,7 +10,7 @@
 
 <center>
     <body style="margin-top: auto; margin-bottom: auto;">
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-dark bg-dark">
     <div class="form-inline">
         <a class="navbar-brand" href="/"><i class="fa fa-fw fa-home"></i></a>
         <form class="form-inline" action="#" th:action="@{/user/authentication}" th:object="${user}" method="post">
@@ -21,11 +21,14 @@
         <h2 th:text="${message}"></h2>
     </div>
     </nav>
+    <div class="container" style="height:400px; max-height:500; display:flex; justify-content: center; align-items: center">
+    <div class="item">
     <h1>Welcome to GitClub!</h1>
+        <br />
     <h6>Click below to Sign Up!</h6>
-    <div>
-        <a class="btn btn-primary" href="/registerTeam">Manager Sign Up</a>
-        <a class="btn btn-primary" href="/registerPlayer">Player Sign Up</a>
+        <a class="btn btn-outline-primary" style="width:160px;" href="/registerTeam">Manager Sign Up</a>
+        <a class="btn btn-outline-dark" style="width:160px;" href="/registerPlayer">Player Sign Up</a>
+    </div>
     </div>
     </body>
 </center>

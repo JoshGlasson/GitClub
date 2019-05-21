@@ -24,7 +24,7 @@
     <input type="hidden" id="role" th:attr="value=${role}">
     <input type="hidden" id="teamid" th:attr="value=${teamid}">
     <input type="hidden" id="current_user" th:attr="value=${current_user}">
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -52,6 +52,9 @@
         </div>
     </nav>
 
+    <div th:if="${role == 'manager'}">
+        <h2 style="display:inline;">Your TeamID: </h2> <h2 style="display:inline;" th:text="${teamid}"></h2>
+    </div>
     <div class="container" style="max-width:3000px; padding:0px; margin:0px">
         <div class="row">
             <div class="col-md-6" style="padding: 50px">
@@ -59,13 +62,12 @@
                 <div id="calendar"></div>
                 <script src='built/viewFixturesPage.js'></script>
                 <div th:if="${role == 'manager'}">
-                    <a href="/addFixtures">Add Fixtures</a>
+                    <a href="/addFixtures"><button type="button" class="btn btn-outline-dark">Add Fixtures</button></a>
                 </div>
             </div>
 
             <div class="col-md-6" style="padding: 50px">
                 <h1 th:text="${role}"></h1>
-                <h1 style="display:inline;">Your TeamID: </h1> <h1 style="display:inline;" th:text="${teamid}"></h1>
                 <div id="landingPage"></div>
                 <script src="built/landingPage.js"></script>
             </div>
@@ -82,7 +84,7 @@
                 <div id="teamSheet"></div>
                 <script src="built/teamSheetPage.js"></script>
                 <div th:if="${role == 'manager'}">
-                    <a href="/availability">Manage Team Availability</a>
+                    <a href="/availability"><button type="button" class="btn btn-outline-dark">Manage Team Availability</button></a>
                 </div>
             </div>
 
