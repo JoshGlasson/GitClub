@@ -24,9 +24,7 @@ constructor(props){
 
     return (
     <div>
-        <h1>"Hello"</h1>
-        {managerView}
-
+        <img src={'https://upload.wikimedia.org/wikipedia/commons/c/c9/Boisko.svg'} alt="Pitch"/>
     </div>
 
     )
