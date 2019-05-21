@@ -77,7 +77,7 @@ console.log(this.props.item)
   render(){
   const icon = (this.state.weatherId === undefined ? null : <img src={'https://openweathermap.org/img/w/'+this.state.weatherId+'.png'} alt="Weather Icon"/>)
   const weather = (this.props.item === null ? <h1>Loading Weather...</h1> : <Weather temperature={this.state.temperature} city={this.state.city} country={this.state.country} humidity={this.state.humidity} description={this.state.description} error={this.state.error} />)
-  const map = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <GoogleApiWrapper lat={this.state.lat} lng={this.state.lon} />)
+  const map = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <GoogleApiWrapper lat={this.state.lat} lng={this.state.lon} loc={this.props.item} />)
 
       return(
         <div>
