@@ -15,7 +15,7 @@ constructor(props){
         location: '',
         season: '',
         fixtures: [],
-        teamname: [],
+        teamname: null,
         homeCheck: true,
     };
     this.training = this.training.bind(this);

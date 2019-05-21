@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS fixtures;
 CREATE TABLE fixtures (
   id bigserial PRIMARY KEY,
   date varchar(250) NOT NULL,
-  fixture varchar(250) NOT NULL UNIQUE,
+  fixture varchar(250) NOT NULL,
   location varchar(250) NOT NULL,
   season varchar(250) NOT NULL,
   result varchar(250),
