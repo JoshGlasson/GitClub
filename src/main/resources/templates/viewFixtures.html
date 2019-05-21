@@ -51,7 +51,7 @@
 <input type="hidden" id="teamid" th:attr="value=${teamid}">
 <input type="hidden" id="role" th:attr="value=${role}">
 <div th:if="${role == 'manager'}">
-    <a href="addFixtures" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Fixtures</a>
+    <a href="/addFixtures"><button type="button" class="btn btn-outline-dark">Add Fixtures</button></a>
 </div>
 
 <div id='calendar'></div>

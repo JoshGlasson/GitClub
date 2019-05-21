@@ -16,7 +16,7 @@ constructor(props){
         <tbody>
           <td>{this.capitalise(this.props.item.name)}</td>
           <td>{this.capitalise(this.props.item.position)}</td>
-          <td><button type="button" class="btn btn-primary" onClick={this.deletePlayer} >Delete</button></td>
+          <td><button type="button" class="btn btn-danger" onClick={this.deletePlayer} >Delete</button></td>
         </tbody>
     )
     } else {
