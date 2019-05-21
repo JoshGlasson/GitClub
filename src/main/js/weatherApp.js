@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 const ReactDOM = require('react-dom');
 import Weather from "./weather.js";
+import GoogleApiWrapper from "./map.js";
 
 
 const Api_Key = "8d2de98e089f1c28e1a22fc19a24ef04";
@@ -16,7 +17,9 @@ class WeatherApp extends Component {
     humidity: undefined,
     description: undefined,
     error: undefined,
-    weatherId: undefined
+    weatherId: undefined,
+    lat: undefined,
+    lon: undefined
   }
 
   fetch('https://api.openweathermap.org/data/2.5/weather?q='+this.props.item+',UK&appid='+Api_Key+'&units=metric').then((response) => {
@@ -35,9 +38,12 @@ class WeatherApp extends Component {
                                           humidity: json.main.humidity,
                                           description: json.weather[0].description,
                                           weatherId: json.weather[0].icon,
+                                          lat: json.coord.lat,
+                                          lon: json.coord.lon,
                                           error: ""
                                         })
                                });
+
 
 
 //  // getWeather is a method we'll use to make the api call
@@ -71,10 +77,13 @@ console.log(this.props.item)
   render(){
   const icon = (this.state.weatherId === undefined ? null : <img src={'https://openweathermap.org/img/w/'+this.state.weatherId+'.png'} alt="Weather Icon"/>)
   const weather = (this.props.item === null ? <h1>Loading Weather...</h1> : <Weather temperature={this.state.temperature} city={this.state.city} country={this.state.country} humidity={this.state.humidity} description={this.state.description} error={this.state.error} />)
+  const map = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <GoogleApiWrapper lat={this.state.lat} lng={this.state.lon} />)
+
       return(
         <div>
           {icon}
           {weather}
+          {map}
         </div>
       )
     };
