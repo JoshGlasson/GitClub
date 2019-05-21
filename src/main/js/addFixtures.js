@@ -153,7 +153,7 @@ constructor(props, context){
        </form>
     </div>
 
-    <Button class="btn btn-outline-dark" style={{paddingBottom:"10px"}} onClick={() => this.setState({open: !this.state.open })} aria-controls="example-collapse-text" aria-expanded={this.state.open}>{(this.state.open? 'Hide' : 'View')+' Fixtures'}</Button>
+    <Button variant={(this.state.open? 'dark' : 'outline-dark')} onClick={() => this.setState({open: !this.state.open })} aria-controls="example-collapse-text" aria-expanded={this.state.open}>{(this.state.open? 'Hide' : 'View')+' Fixtures'}</Button>
     <br/>
     <div>
     {fixtureBox}
