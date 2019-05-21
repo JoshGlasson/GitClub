@@ -84,7 +84,14 @@ class NextTwoFixtures extends React.Component {
         const contents = this.state.nextFixtures.sort( function(a, b){ return (a._links.self.href.split("/")[a._links.self.href.split("/").length-1]) - (b._links.self.href.split("/")[b._links.self.href.split("/").length-1])})
                                        .map((item, key) => <Fixtures item={item} key={item.id} />)
 
-        const weather = (this.state.nextFixture === [] ? <h3>Loading Weather...</h3> : <WeatherApp item={this.state.nextFixture} />)
+
+
+        const location = (this.state.nextFixture.location !== undefined ? this.state.nextFixture.location : null)
+
+        console.log(location)
+
+        const weather = (location !== null ? <WeatherApp item={location} /> : <h3>Loading Weather...</h3>)
+
 
     return (
     <div>

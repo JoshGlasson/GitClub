@@ -1,4 +1,4 @@
-const React = require('react');
+import React, {Component} from 'react';
 const ReactDOM = require('react-dom');
 import Weather from "./weather.js";
 import Form from "./form.js";
@@ -6,9 +6,9 @@ import Form from "./form.js";
 
 const Api_Key = "8d2de98e089f1c28e1a22fc19a24ef04";
 
-class WeatherApp extends React.Component {
+class WeatherApp extends Component {
   constructor(props){
-    super(props)
+    super(props);
    this.state = {
 
     temperature: undefined,
@@ -16,10 +16,11 @@ class WeatherApp extends React.Component {
     country: undefined,
     humidity: undefined,
     description: undefined,
-    error: undefined
+    error: undefined,
+    weatherId: undefined
   }
 
-  fetch('http://api.openweathermap.org/data/2.5/weather?q='+this.props.item.location+',UK&appid='+Api_Key).then((response) => {
+  fetch('http://api.openweathermap.org/data/2.5/weather?q='+this.props.item+',UK&appid='+Api_Key+'&units=metric').then((response) => {
                                     if(response.ok) {
                                       return response.json();
                                     } else {
@@ -34,6 +35,7 @@ class WeatherApp extends React.Component {
                                           country: json.sys.country,
                                           humidity: json.main.humidity,
                                           description: json.weather[0].description,
+                                          weatherId: json.weather[0].icon,
                                           error: ""
                                         })
                                });
@@ -62,13 +64,17 @@ class WeatherApp extends React.Component {
 //      })
 //    }
 //  }
-
+console.log(this.props.item)
   }
 
+
+
   render(){
-  const weather = (this.state.temperature === undefined ? <h1>Loading...</h1> : <Weather temperature={this.state.temperature} city={this.state.city} country={this.state.country} humidity={this.state.humidity} description={this.state.description} error={this.state.error} />)
+  const icon = (this.state.weatherId === undefined ? null : <img src={'http://openweathermap.org/img/w/'+this.state.weatherId+'.png'} alt="Weather Icon"/>)
+  const weather = (this.props.item === null ? <h1>Loading Weather...</h1> : <Weather temperature={this.state.temperature} city={this.state.city} country={this.state.country} humidity={this.state.humidity} description={this.state.description} error={this.state.error} />)
       return(
         <div>
+          {icon}
           {weather}
         </div>
       )

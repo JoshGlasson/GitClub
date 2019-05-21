@@ -14,8 +14,8 @@ class Weather extends React.Component{
                 }
 
                 {
-                    this.props.temperature && <p className="weather__key">Temperature:
-                        <span className="weather__value">  {this.props.temperature}</span>
+                    (Math.round(this.props.temperature * 10) / 10) && <p className="weather__key">Temperature:
+                        <span className="weather__value">  {(Math.round(this.props.temperature * 10) / 10) +'°C'}</span>
                     </p>
                 }
 
