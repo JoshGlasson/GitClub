@@ -49,7 +49,11 @@
     </div>
 </nav>
 <input type="hidden" id="teamid" th:attr="value=${teamid}">
-<a href="addFixtures" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Fixtures</a>
+<input type="hidden" id="role" th:attr="value=${role}">
+<div th:if="${role == 'manager'}">
+    <a href="addFixtures" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Fixtures</a>
+</div>
+
 <div id='calendar'></div>
 <script src='built/viewFixturesPage.js'></script>
 </body>

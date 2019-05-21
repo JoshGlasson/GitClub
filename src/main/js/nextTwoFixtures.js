@@ -14,6 +14,7 @@ class NextTwoFixtures extends React.Component {
               allFixtures: [],
               nextFixtures: [],
               nextFixture: [],
+              role: document.getElementById("role").value,
           }
 
 
@@ -68,8 +69,7 @@ class NextTwoFixtures extends React.Component {
    }
 
     render() {
-
-        const headers =   <thead class="thead-dark">
+        const managerHeaders =   <thead class="thead-dark">
                         <tr>
                             <th>Fixtures</th>
                             <th>Date</th>
@@ -80,6 +80,16 @@ class NextTwoFixtures extends React.Component {
                         </tr>
                     </thead>
 
+        const playerHeaders =   <thead class="thead-dark">
+                                <tr>
+                                    <th>Fixtures</th>
+                                    <th>Date</th>
+                                    <th>Score</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+
+        const headers = (this.state.role === 'manager' ? managerHeaders : playerHeaders)
 
         const contents = this.state.nextFixtures.sort( function(a, b){ return ((new Date(a.date) - new Date()) - (new Date(b.date) - new Date()))})
                                        .map((item, key) => <Fixtures item={item} key={item.id} />)

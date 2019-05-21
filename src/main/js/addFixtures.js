@@ -17,6 +17,7 @@ constructor(props){
         fixtures: [],
         teamname: null,
         homeCheck: true,
+        role: document.getElementById("role").value,
     };
     this.training = this.training.bind(this);
     this.addFixture = this.addFixture.bind(this);
@@ -75,16 +76,27 @@ constructor(props){
 
   render() {
 
-  const headers =   <thead class="thead-dark">
-                        <tr>
-                            <th>Fixtures</th>
-                            <th>Date</th>
-                            <th>Score</th>
-                            <th>Location</th>
-                            <th>Add Score</th>
-                            <th>Delete Fixture</th>
-                        </tr>
-                    </thead>
+  const managerHeaders =   <thead class="thead-dark">
+                         <tr>
+                             <th>Fixtures</th>
+                             <th>Date</th>
+                             <th>Score</th>
+                             <th>Location</th>
+                             <th>Add Score</th>
+                             <th>Delete Fixture</th>
+                         </tr>
+                     </thead>
+
+  const playerHeaders =   <thead class="thead-dark">
+                         <tr>
+                             <th>Fixtures</th>
+                             <th>Date</th>
+                             <th>Score</th>
+                             <th>Location</th>
+                         </tr>
+                     </thead>
+
+  const headers = (this.state.role === 'manager' ? managerHeaders : playerHeaders)
 
 
   const contents = this.state.fixtures.sort( function(a, b){ return (b._links.self.href.split("/")[b._links.self.href.split("/").length-1]) - (a._links.self.href.split("/")[a._links.self.href.split("/").length-1])})

@@ -3,21 +3,30 @@ import React, {Component} from 'react';
 class Team extends Component {
 constructor(props){
     super(props);
-    this.state = {userid: this.props.item._links.self.href.split("/")[this.props.item._links.self.href.split("/").length-1] };
+    this.state = {userid: this.props.item._links.self.href.split("/")[this.props.item._links.self.href.split("/").length-1], role: document.getElementById("role").value, };
     this.deletePlayer = this.deletePlayer.bind(this);
     this.capitalise = this.capitalise.bind(this);
+
     }
 
     render() {
-        return (
 
+    if(this.state.role === 'manager'){
+    return (
         <tbody>
           <td>{this.capitalise(this.props.item.name)}</td>
           <td>{this.capitalise(this.props.item.position)}</td>
           <td><button type="button" class="btn btn-primary" onClick={this.deletePlayer} >Delete</button></td>
         </tbody>
-        );
-
+    )
+    } else {
+    return (
+        <tbody>
+          <td>{this.capitalise(this.props.item.name)}</td>
+          <td>{this.capitalise(this.props.item.position)}</td>
+        </tbody>
+    )
+    }
 
     }
 

@@ -8,6 +8,7 @@ constructor(props){
     super(props)
     this.state = {
         teamid: document.getElementById("teamid").value,
+        role: document.getElementById("role").value,
         team: [],
         teamName: null,
     };
@@ -55,13 +56,22 @@ constructor(props){
 
   const name = (this.state.teamName === null ? <h1>Loading...</h1> : this.state.teamName)
 
-  const headers =   <thead class="thead-dark">
-                              <tr>
-                                  <th>Player Name</th>
-                                  <th>Position</th>
-                                  <th>Delete Player</th>
-                               </tr>
-                            </thead>
+  const managerHeaders =   <thead class="thead-dark">
+                             <tr>
+                                 <th>Player Name</th>
+                                 <th>Position</th>
+                                 <th>Delete Player</th>
+                              </tr>
+                           </thead>
+
+      const playerHeaders =   <thead class="thead-dark">
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Position</th>
+                                 </tr>
+                              </thead>
+
+      const headers = (this.state.role === 'manager' ? managerHeaders : playerHeaders)
 
   const content = (this.state.team === [] ? <h1>Loading...</h1> : this.state.team.map((item) => <Team item={item} key={item.id} />))
 

@@ -9,6 +9,7 @@ constructor(props){
     this.state = {
         teamid: document.getElementById("teamid").value,
         fixtures: [],
+        role: document.getElementById("role").value,
     };
 
     fetch('/api/fixtureses/search/findByTeamid?teamid='+ this.state.teamid, {
@@ -34,16 +35,27 @@ constructor(props){
 
   render() {
 
-  const headers =   <thead class="thead-dark">
-                        <tr>
-                            <th>Fixtures</th>
-                            <th>Date</th>
-                            <th>Score</th>
-                            <th>Location</th>
-                            <th>Add Score</th>
-                            <th>Delete Fixture</th>
-                        </tr>
-                    </thead>
+  const managerHeaders =   <thead class="thead-dark">
+                           <tr>
+                               <th>Fixtures</th>
+                               <th>Date</th>
+                               <th>Score</th>
+                               <th>Location</th>
+                               <th>Add Score</th>
+                               <th>Delete Fixture</th>
+                           </tr>
+                       </thead>
+
+    const playerHeaders =   <thead class="thead-dark">
+                           <tr>
+                               <th>Fixtures</th>
+                               <th>Date</th>
+                               <th>Score</th>
+                               <th>Location</th>
+                           </tr>
+                       </thead>
+
+    const headers = (this.state.role === 'manager' ? managerHeaders : playerHeaders)
 
   const contents = this.state.fixtures.sort( function(a, b){ return new Date(a.date) - new Date(b.date)})
                                           .map((item, key) => <Fixtures item={item} key={item.id} />)
