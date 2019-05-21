@@ -78,7 +78,7 @@ class Table extends React.Component {
       return (
          <div>
             <h1 id='title'> Team Availability</h1>
-            <table class="table table-bordered">
+            <table class="table table-bordered" style={{ width:500, maxWidth:1000 }}>
                {headers}
                {contents}
            </table>

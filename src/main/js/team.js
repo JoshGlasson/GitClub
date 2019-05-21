@@ -5,13 +5,17 @@ constructor(props){
     super(props);
     this.state = {userid: this.props.item._links.self.href.split("/")[this.props.item._links.self.href.split("/").length-1] };
     this.deletePlayer = this.deletePlayer.bind(this);
+    this.capitalise = this.capitalise.bind(this);
     }
 
     render() {
         return (
-            <div>
-                 <p>| {this.props.item.name} | {this.props.item.position} {this.props.id}| <a href="/viewTeam"><button type="button" class="btn btn-primary" onClick={this.deletePlayer} >Delete</button></a></p>
-            </div>
+
+        <tbody>
+          <td>{this.capitalise(this.props.item.name)}</td>
+          <td>{this.capitalise(this.props.item.position)}</td>
+          <td><button type="button" class="btn btn-primary" onClick={this.deletePlayer} >Delete</button></td>
+        </tbody>
         );
 
 
@@ -27,6 +31,10 @@ constructor(props){
                                    },
                                  })
                };
+
+     capitalise(string) {
+         return string.charAt(0).toUpperCase() + string.slice(1);
+     }
 }
 
 

@@ -58,7 +58,7 @@ constructor(props){
         return (
         <tbody>
           <td>{this.props.item.name}</td>
-          <td><input type="checkbox" class="form-check-input" checked={this.state.checked} onChange={this.available} name='checked'></input></td>
+          <td><label class="form-check-label" htmlFor="checked" style={{ paddingRight:"30px" }}>Available?</label><input type="checkbox" class="form-check-input" checked={this.state.checked} onChange={this.available} name='checked'></input></td>
         </tbody>
          )
     };

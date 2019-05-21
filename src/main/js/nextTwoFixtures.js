@@ -81,7 +81,7 @@ class NextTwoFixtures extends React.Component {
                     </thead>
 
 
-        const contents = this.state.nextFixtures.sort( function(b, a){ return (b._links.self.href.split("/")[b._links.self.href.split("/").length-1]) - (a._links.self.href.split("/")[a._links.self.href.split("/").length-1])})
+        const contents = this.state.nextFixtures.sort( function(a, b){ return ((new Date(a.date) - new Date()) - (new Date(b.date) - new Date()))})
                                        .map((item, key) => <Fixtures item={item} key={item.id} />)
 
 
@@ -96,7 +96,7 @@ class NextTwoFixtures extends React.Component {
     return (
     <div>
     <h1>Next Two Fixtures</h1>
-    <table class="table table-bordered">
+    <table class="table table-bordered" style={{width:550}}>
         {headers}
         {contents}
     </table>

@@ -52,9 +52,9 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container" style="max-width:1440px; padding:0px; margin:0px">
         <div class="row">
-            <div class="col-md-6" id='calendar' style="padding: 50px; margin:auto">
+            <div class="col-md-6" id='calendar' style="padding: 50px">
                 <script src='built/viewFixturesPage.js'></script>
                 <div th:if="${role == 'manager'}">
                     <a href="/addFixtures">Add Fixtures</a>
