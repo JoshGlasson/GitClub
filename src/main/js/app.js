@@ -16,11 +16,10 @@ constructor(props){
   render() {
     let managerView;
       if(this.state.role === "manager"){
-        managerView = <div><a href="/addFixtures">Add Fixtures</a>
-                      <a href="/availability">Availability</a></div>
+        managerView = 'Manager'
 
       } else {
-        managerView = <a href="/viewFixtures">View Fixtures</a>
+        managerView = 'Player'
       }
 
     return (
