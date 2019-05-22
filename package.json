@@ -19,6 +19,7 @@
     "dayz": "^2.4.0",
     "google-maps-react": "^2.0.2",
     "leaflet": "^1.5.1",
+    "leaflet-routing-machine": "^3.2.12",
     "mdbreact": "^4.14.0",
     "react": "^16.4.0",
     "react-big-scheduler": "^0.2.7",

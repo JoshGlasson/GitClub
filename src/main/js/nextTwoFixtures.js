@@ -138,10 +138,6 @@ class NextTwoFixtures extends React.Component {
         {headers}
         {contents}
     </table>
-    <h3>Match Day Weather</h3>
-    {weather}
-    <h3>Match Location</h3>
-    {lmap}
     </div>
     )
   }
