@@ -215,22 +215,33 @@ constructor(props, context){
                                  training: this.state.training,
                                  teamid: this.state.teamid,
                                })
-                             });
+                             })
+                             .then((response) => {
+                                            if(response.ok) {
+                                              return response.json();
+                                            } else {
+                                              throw new Error('Server response wasn\'t OK');
+                                            }
+                                          })
+                                          .then((json) => {
+                                            var fixtureid = json._links.self.href.split("/")[json._links.self.href.split("/").length-1]
+                                            fetch('/api/calendars', {
+                                               method: 'POST',
+                                               headers: {
+                                                 'Accept': 'application/json',
+                                                 'Content-Type': 'application/json',
+                                               },
+                                               body: JSON.stringify({
+                                                 title: (this.state.training ? this.state.teamname + ' Training' : (this.state.homeCheck ? this.state.teamname + ' v ' + this.state.opponent : this.state.opponent + ' v ' + this.state.teamname)),
+                                                 start: this.state.date + "T" + this.state.time + ":00",
+                                                 color: (this.state.training ? '#F75D59' : '#59F2F7'),
+                                                 teamid: this.state.teamid,
+                                                 fixtureid: fixtureid,
+                                               })
+                                             });
+                                          });
                              window.alert("Fixture Added");
-        fetch('/api/calendars', {
-                                       method: 'POST',
-                                       headers: {
-                                         'Accept': 'application/json',
-                                         'Content-Type': 'application/json',
-                                       },
-                                       body: JSON.stringify({
-                                         title: (this.state.training ? this.state.teamname + ' Training' : (this.state.homeCheck ? this.state.teamname + ' v ' + this.state.opponent : this.state.opponent + ' v ' + this.state.teamname)),
-                                         start: this.state.date + "T" + this.state.time + ":00",
-                                         color: (this.state.training ? '#F75D59' : '#59F2F7'),
-                                         teamid: this.state.teamid,
-                                       })
-                                     });
-                                     location.href = window.location.href
+                             location.href = window.location.href
      }
   };
 

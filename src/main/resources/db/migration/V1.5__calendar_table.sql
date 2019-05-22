@@ -5,5 +5,6 @@ CREATE TABLE calendar (
   title varchar(250) NOT NULL,
   start varchar(250) NOT NULL,
   color varchar(250) NOT NULL,
-  teamid bigserial REFERENCES team(id)
+  teamid bigserial REFERENCES team(id),
+  fixtureid bigserial REFERENCES fixtures(id)
 );

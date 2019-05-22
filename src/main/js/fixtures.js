@@ -64,19 +64,18 @@ constructor(props){
     }
 
         deleteFixture(){
-         console.log("Pre Fetch")
-               fetch('/api/fixtureses/'+ this.state.fixtureid, {
-                               method: 'DELETE',
-                               headers: {
-                                 'Accept': 'application/json',
-                                 'Content-Type': 'application/json',
-                               },
-                             })
-                             location.href = self.location.href;
-
-
-
-           };
+             console.log("Pre Fetch")
+                    fetch('/api/availabilities/search/deleteByFixtureid?fixtureid='+ this.state.fixtureid).then(
+                    fetch('/api/calendars/search/deleteByFixtureid?fixtureid='+ this.state.fixtureid).then(
+                    fetch('/api/fixtureses/'+ this.state.fixtureid, {
+                                   method: 'DELETE',
+                                   headers: {
+                                     'Accept': 'application/json',
+                                     'Content-Type': 'application/json',
+                                   },
+                                 })))
+                                 location.href = self.location.href;
+               };
 
          addResult(){
             this.setState({showComponent:true})
