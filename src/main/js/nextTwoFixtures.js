@@ -130,7 +130,6 @@ class NextTwoFixtures extends React.Component {
         console.log(location)
 
         const weather = (this.state.lat === undefined ? <h3>Loading Weather...</h3> : <WeatherApp lat={this.state.lat} lng={this.state.lon} date={this.state.nextFixture.date} loc={this.state.place}/>)
-        const map = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <GoogleApiWrapper lat={this.state.lat} lng={this.state.lon} />)
         const lmap = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <MyMap lat={this.state.lat} lng={this.state.lon} loc={this.state.nextFixture.location} />)
 
     return (
@@ -142,8 +141,7 @@ class NextTwoFixtures extends React.Component {
     <h3>Match Day Weather</h3>
     {weather}
     <h3>Match Location</h3>
-    <Button variant={(this.state.map? 'outline-primary' : 'outline-success')} onClick={() => this.setState({map: !this.state.map })} >{(this.state.map ? 'Google Map' : 'Leaflet Map')}</Button>
-    {(this.state.map ? map : lmap)}
+    {lmap}
     </div>
     )
   }
@@ -154,4 +152,7 @@ class NextTwoFixtures extends React.Component {
 
 ReactDOM.render(<NextTwoFixtures />, document.getElementById('nextTwoFixtures'));
 
-
+// Google Map
+//        const map = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <GoogleApiWrapper lat={this.state.lat} lng={this.state.lon} />)
+//        <Button variant={(this.state.map? 'outline-primary' : 'outline-success')} onClick={() => this.setState({map: !this.state.map })} >{(this.state.map ? 'Google Map' : 'Leaflet Map')}</Button>
+//        {(this.state.map ? map : lmap)}

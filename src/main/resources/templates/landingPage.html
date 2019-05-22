@@ -72,8 +72,12 @@
             </div>
 
             <div class="col-md-6" style="padding: 50px">
-                <div id="landingPage"></div>
-                <script src="built/landingPage.js"></script>
+                <h1>Team Sheet for Next Game</h1>
+                <div id="teamSheet"></div>
+                <script src="built/teamSheetPage.js"></script>
+                <div th:if="${role == 'manager'}">
+                    <a href="/availability"><button type="button" class="btn btn-outline-dark">Manage Team Availability</button></a>
+                </div>
             </div>
 
             <div class="w-100"></div>
@@ -84,12 +88,8 @@
             </div>
 
             <div class="col-md-6" style="padding: 50px">
-                <h1>Team Sheet for Next Game</h1>
-                <div id="teamSheet"></div>
-                <script src="built/teamSheetPage.js"></script>
-                <div th:if="${role == 'manager'}">
-                    <a href="/availability"><button type="button" class="btn btn-outline-dark">Manage Team Availability</button></a>
-                </div>
+                <div id="landingPage"></div>
+                <script src="built/landingPage.js"></script>
             </div>
 
         </div>
