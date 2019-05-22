@@ -9,8 +9,8 @@ constructor(props){
     return (
       <LeafletMap
         center={[this.props.lat, this.props.lng]}
-        zoom={12}
-        maxZoom={15}
+        zoom={14}
+        maxZoom={16}
         attributionControl={true}
         zoomControl={true}
         doubleClickZoom={true}
