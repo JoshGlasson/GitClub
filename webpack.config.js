@@ -9,7 +9,9 @@ module.exports = {
         viewFixturesPage: './src/main/js/calendar.js',
         availabilityPage: './src/main/js/availabilityTable.js',
         nextTwoFixturesPage: './src/main/js/nextTwoFixtures.js',
-        teamSheetPage: './src/main/js/teamSheet.js'
+        teamSheetPage: './src/main/js/teamSheet.js',
+        mapPage: './src/main/js/mappage.js',
+
 
     },
     devtool: 'sourcemaps',

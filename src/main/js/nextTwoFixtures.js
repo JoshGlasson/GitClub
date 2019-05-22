@@ -19,10 +19,6 @@ class NextTwoFixtures extends React.Component {
               nextFixtures: [],
               nextFixture: [],
               role: document.getElementById("role").value,
-              lat: undefined,
-              lon: undefined,
-              place: undefined,
-              map: false
           }
 
 
@@ -70,28 +66,6 @@ class NextTwoFixtures extends React.Component {
                   (this.state.allFixtures[1] === undefined ? null : twoGames.push(this.state.allFixtures[1]));
                   this.setState({nextFixtures: twoGames})
                   console.log(this.state.nextFixtures)
-                  fetch('https://nominatim.openstreetmap.org/search/'+this.state.nextFixture.location+'?format=json&limit=1', {
-                                          method: 'GET',
-                                          headers: {
-                                          'Content-Type': 'application/json',
-                                          },
-                                          credentials: 'same-origin'
-                                          }).then((response) => {
-                                            if(response.ok) {
-                                              return response.json();
-                                            } else {
-                                              throw new Error('Server response wasn\'t OK');
-                                            }
-                                          })
-                                          .then((json) => {
-                                          console.log(json)
-                                          this.setState({
-                                                lat: json[0].lat,
-                                                lon: json[0].lon,
-                                                place: json[0].display_name
-                                              })
-                                          console.log(this.state.lat)
-                                          });
                 });
 
 
@@ -129,19 +103,12 @@ class NextTwoFixtures extends React.Component {
 
         console.log(location)
 
-        const weather = (this.state.lat === undefined ? <h3>Loading Weather...</h3> : <WeatherApp lat={this.state.lat} lng={this.state.lon} date={this.state.nextFixture.date} loc={this.state.place}/>)
-        const lmap = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <MyMap lat={this.state.lat} lng={this.state.lon} loc={this.state.nextFixture.location} />)
-
     return (
     <div>
-    <table class="table table-bordered" style={{ width:750, maxWidth:1000 }}>
+    <table class="table table-bordered" style={{ fontSize:14, minWidth: 500, maxWidth:1000 }}>
         {headers}
         {contents}
     </table>
-    <h3>Match Day Weather</h3>
-    {weather}
-    <h3>Match Location</h3>
-    {lmap}
     </div>
     )
   }
@@ -151,8 +118,3 @@ class NextTwoFixtures extends React.Component {
 
 
 ReactDOM.render(<NextTwoFixtures />, document.getElementById('nextTwoFixtures'));
-
-// Google Map
-//        const map = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <GoogleApiWrapper lat={this.state.lat} lng={this.state.lon} />)
-//        <Button variant={(this.state.map? 'outline-primary' : 'outline-success')} onClick={() => this.setState({map: !this.state.map })} >{(this.state.map ? 'Google Map' : 'Leaflet Map')}</Button>
-//        {(this.state.map ? map : lmap)}

@@ -1,11 +1,10 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-import WeatherApp from "./weatherApp.js";
 import MyMap from "./leafletMap.js";
 import Button from 'react-bootstrap/Button';
 
 
-class App extends React.Component {
+class MapPage extends React.Component {
 constructor(props){
     super(props)
     this.state = {
@@ -69,12 +68,12 @@ fetch('/api/fixtureses/search/findByTeamid?teamid='+ this.state.teamid, {
 
   render() {
 
-  const weather = (this.state.lat === undefined ? <h3>Loading Weather...</h3> : <WeatherApp lat={this.state.lat} lng={this.state.lon} date={this.state.nextFixture.date} loc={this.state.place}/>)
+  const lmap = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <MyMap lat={this.state.lat} lng={this.state.lon} loc={this.state.nextFixture.location} />)
 
     return (
     <div>
-     <h3>Next Match Day Weather</h3>
-        {weather}
+     <h3>Match Location</h3>
+        {lmap}
     </div>
     )
   }
@@ -83,8 +82,8 @@ fetch('/api/fixtureses/search/findByTeamid?teamid='+ this.state.teamid, {
 }
 
 ReactDOM.render(
-	<App />,
-	document.getElementById('landingPage')
+	<MapPage />,
+	document.getElementById('mapPage')
 )
 
 

@@ -21,8 +21,8 @@ constructor(props){
               <td>{this.prettyDate(this.props.item.date)}</td>
               <td>{(this.props.item.result === null ? this.prettyTime(this.props.item.date) : this.props.item.result)}</td>
               <td>{this.props.item.location}</td>
-              <td>{this.state.showComponent ?  <div><AddResult item={this.state.fixtureid}/><button type="button" class="btn btn-danger form-inline btn-sm" onClick={this.cancelAddResult}>Cancel</button></div> : <button type="button" class="btn btn-success" onClick={this.addResult}>Add Result</button>}</td>
-              <td><button class="btn btn-danger" onClick={this.deleteFixture}>Delete</button></td>
+              <td>{this.state.showComponent ?  <div><AddResult item={this.state.fixtureid}/><button type="button" class="btn btn-danger form-inline btn-sm" onClick={this.cancelAddResult}>Cancel</button></div> : <button type="button" class="btn btn-success btn-sm" onClick={this.addResult}>Add Result</button>}</td>
+              <td><button class="btn btn-danger btn-sm" onClick={this.deleteFixture}>Delete</button></td>
             </tbody>
              )
     } else {

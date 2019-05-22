@@ -19,8 +19,9 @@
     margin: 0 auto;
   }
   .leaflet-container {
-    height: 400px;
-    width: 800px;
+    max-width: 3000px;
+    height: 500px;
+    min-width: 500px;
   }
 </style>
 </head>
@@ -72,6 +73,18 @@
             </div>
 
             <div class="col-md-6" style="padding: 50px">
+                <div id="landingPage"></div>
+                <script src="built/landingPage.js"></script>
+            </div>
+
+            <div class="w-100" style="box-sizing: border-box"></div>
+            <div class="col-md-6" style="padding: 50px">
+                <h1>Next Two Fixtures</h1>
+                <div id="nextTwoFixtures"></div>
+                <script src="built/nextTwoFixturesPage.js"></script>
+            </div>
+
+            <div class="col-md-6" style="padding: 50px">
                 <h1>Team Sheet for Next Game</h1>
                 <div id="teamSheet"></div>
                 <script src="built/teamSheetPage.js"></script>
@@ -81,15 +94,9 @@
             </div>
 
             <div class="w-100"></div>
-            <div class="col-md-6" style="padding: 50px">
-                <h1>Next Two Fixtures</h1>
-                <div id="nextTwoFixtures"></div>
-                <script src="built/nextTwoFixturesPage.js"></script>
-            </div>
-
-            <div class="col-md-6" style="padding: 50px">
-                <div id="landingPage"></div>
-                <script src="built/landingPage.js"></script>
+            <div class="col-md-12" style="padding: 50px">
+                <div id="mapPage"></div>
+                <script src="built/mapPage.js"></script>
             </div>
 
         </div>
