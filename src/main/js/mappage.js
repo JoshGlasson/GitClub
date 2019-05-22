@@ -58,6 +58,7 @@ fetch('/api/fixtureses/search/findByTeamid?teamid='+ this.state.teamid, {
                                                 lat: json[0].lat,
                                                 lon: json[0].lon,
                                                 place: json[0].display_name
+
                                               })
                                           console.log(this.state.lat)
                                           });

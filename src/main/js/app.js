@@ -19,6 +19,9 @@ constructor(props){
         map: false
     };
 
+    this.prettyDate = this.prettyDate.bind(this);
+    this.prettyTime = this.prettyTime.bind(this);
+
 fetch('/api/fixtureses/search/findByTeamid?teamid='+ this.state.teamid, {
              method: 'GET',
              headers: {
@@ -69,15 +72,40 @@ fetch('/api/fixtureses/search/findByTeamid?teamid='+ this.state.teamid, {
 
   render() {
 
+  const dateAndTime = (this.state.nextFixture === [] ? null : this.prettyDate(this.state.nextFixture.date) + ' - ' + this.prettyTime(this.state.nextFixture.date) )
   const weather = (this.state.lat === undefined ? <h3>Loading Weather...</h3> : <WeatherApp lat={this.state.lat} lng={this.state.lon} date={this.state.nextFixture.date} loc={this.state.place}/>)
 
     return (
     <div>
-     <h3>Next Match Day Weather</h3>
+     <h3>Match Day Weather On {dateAndTime}</h3>
         {weather}
     </div>
     )
   }
+
+      prettyDate(value){
+         var monthNames = [
+             "January", "February", "March",
+             "April", "May", "June", "July",
+             "August", "September", "October",
+             "November", "December"
+          ];
+
+          var fulldate = new Date(value)
+          var day = (fulldate.getDate() > 9 ? fulldate.getDate() : '0'+fulldate.getDate())
+          var month = fulldate.getMonth()
+          var year = fulldate.getFullYear()
+          return (day+"-"+monthNames[month]+"-"+year)
+      }
+
+
+      prettyTime(value){
+          var fulldate = new Date(value)
+          var hour = (fulldate.getHours() > 9 ? fulldate.getHours() : '0' + fulldate.getHours())
+          var minutes = (fulldate.getMinutes() > 9 ? fulldate.getMinutes() : '0' + fulldate.getMinutes())
+          var seconds = (fulldate.getSeconds() > 9 ? fulldate.getSeconds() : '0' + fulldate.getSeconds())
+          return (hour+":"+minutes+":"+seconds)
+      }
 
 
 }

@@ -64,7 +64,7 @@
     <div class="container" style="max-width:3000px; padding:0px; margin:0px">
         <div class="row">
             <div class="col-md-6" style="padding: 50px">
-                <h1>Upcoming Fixtures</h1>
+                <h3>Upcoming Fixtures</h3>
                 <div id="calendar"></div>
                 <script src='built/viewFixturesPage.js'></script>
                 <div th:if="${role == 'manager'}">
@@ -79,13 +79,13 @@
 
             <div class="w-100" style="box-sizing: border-box"></div>
             <div class="col-md-6" style="padding: 50px">
-                <h1>Next Two Fixtures</h1>
+                <h3>Next Two Fixtures</h3>
                 <div id="nextTwoFixtures"></div>
                 <script src="built/nextTwoFixturesPage.js"></script>
             </div>
 
             <div class="col-md-6" style="padding: 50px">
-                <h1>Team Sheet for Next Game</h1>
+                <h3>Team Sheet for Next Game</h3>
                 <div id="teamSheet"></div>
                 <script src="built/teamSheetPage.js"></script>
                 <div th:if="${role == 'manager'}">

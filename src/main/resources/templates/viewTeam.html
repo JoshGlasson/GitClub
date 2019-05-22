@@ -11,7 +11,6 @@
 <center>
     <body style="margin-top: auto; margin-bottom: auto;">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,6 +36,10 @@
             </ul>
         </div>
     </nav>
+    <input type="hidden" id="teamid" th:attr="value=${teamid}">
+    <input type="hidden" id="role" th:attr="value=${role}">
+    <div id="viewTeam"></div>
+    <script src="built/viewTeamsPage.js"></script>
     </body>
 </center>
 </html>
