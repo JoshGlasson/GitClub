@@ -1,0 +1,98 @@
+.soccerfield-player {
+    position: absolute;
+    width: 12%;
+    height: 10%;
+}
+
+.soccerfield-field-field-img {
+    width:100%;
+    height: 100%;
+    position:absolute;
+    top: 0px;
+    left:0px;
+}
+
+/*
+player img
+*/
+.soccerfield-player .soccerfield-player-img {
+    display:block;
+    position: absolute;
+    z-index: 100;
+    margin-right: 2px;
+}
+
+/*
+player name
+*/
+.soccerfield-player span {
+}
+
+/*
+GoalKeeper
+*/
+.soccerfield-player.posX-GK {
+    left:5%;
+}
+/*
+Back
+*/
+.soccerfield-player.posX-B {
+    left: 20%;
+}
+/*
+Defending midfielder
+*/
+.soccerfield-player.posX-DM {
+    left: 37%;
+}
+
+/*
+Midfielder
+*/
+.soccerfield-player.posX-M {
+    left:50%;
+}
+/*
+Attacking midfielder
+*/
+.soccerfield-player.posX-AM {
+    left: 65%
+}
+/*
+Forward
+*/
+.soccerfield-player.posX-F {
+    left: 75%;
+}
+/*
+Left
+*/
+.soccerfield-player.posY-L {
+    top: 7%;
+}
+/*
+Left-center
+*/
+.soccerfield-player.posY-LC {
+    top: 25%
+}
+/*
+Center
+*/
+.soccerfield-player.posY-C {
+    top:45%;
+}    
+/*
+Right-center
+*/
+.soccerfield-player.posY-RC {
+    bottom:25%;
+}
+/*
+Right
+*/
+.soccerfield-player.posY-R {
+    bottom:7%;
+}
+
