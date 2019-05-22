@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 const ReactDOM = require('react-dom');
 import Weather from "./weather.js";
-import GoogleApiWrapper from "./map.js";
-
-
-const Api_Key = "8d2de98e089f1c28e1a22fc19a24ef04";
 
 class WeatherApp extends Component {
   constructor(props){
@@ -12,17 +8,25 @@ class WeatherApp extends Component {
    this.state = {
 
     temperature: undefined,
-    city: undefined,
+    city: this.props.loc,
     country: undefined,
     humidity: undefined,
     description: undefined,
     error: undefined,
     weatherId: undefined,
-    lat: undefined,
-    lon: undefined
+    units: undefined,
   }
+  this.formatDate = this.formatDate.bind(this)
 
-  fetch('https://api.openweathermap.org/data/2.5/weather?q='+this.props.item+',UK&appid='+Api_Key+'&units=metric').then((response) => {
+  fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/654d610d54d4d93d721496a26d94ade3/'+this.props.lat+','+this.props.lng+','+this.formatDate(this.props.date)+'?units=auto', {
+                                       method: 'GET',
+                                       mode: 'cors',
+                                       crossdomain: true,
+                                       headers: {
+                                       'Access-Control-Allow-Origin':'*',
+                                       },
+                                       credentials: 'same-origin'
+                                       }).then((response) => {
                                     if(response.ok) {
                                       return response.json();
                                     } else {
@@ -32,58 +36,39 @@ class WeatherApp extends Component {
                                   .then((json) => {
                                   console.log(json)
                                   this.setState({
-                                          temperature: json.main.temp,
-                                          city: json.name,
-                                          country: json.sys.country,
-                                          humidity: json.main.humidity,
-                                          description: json.weather[0].description,
-                                          weatherId: json.weather[0].icon,
-                                          lat: json.coord.lat,
-                                          lon: json.coord.lon,
-                                          error: ""
+                                          temperature: json.currently.temperature,
+                                          humidity: json.currently.humidity,
+                                          description: json.currently.summary,
+                                          weatherId: json.currently.icon,
+                                          units: json.flags.units,
                                         })
                                });
 
 
 
-//  // getWeather is a method we'll use to make the api call
-//  this.getWeather = async (e) => {
-//    const city = this.props.item.location;
-//    const country = 'UK';
-//    e.preventDefault();
-//    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}`);
-//    const response = await api_call.json();
-//    console.log(response);
-//    if(city && country){
-//      this.setState({
-//        temperature: response.main.temp,
-//        city: response.name,
-//        country: response.sys.country,
-//        humidity: response.main.humidity,
-//        description: response.weather[0].description,
-//        error: ""
-//      })
-//    }else{
-//      this.setState({
-//        error: "Please input search values..."
-//      })
-//    }
-//  }
-console.log(this.props.item)
   }
+
+     formatDate(value){
+          var fulldate = new Date(value)
+          var day = (fulldate.getDate() > 9 ? fulldate.getDate() : '0'+fulldate.getDate())
+          var month = (fulldate.getMonth() + 1 > 9 ? fulldate.getMonth() + 1 : '0'+(fulldate.getMonth() + 1))
+          var year = fulldate.getFullYear()
+          var hour = (fulldate.getHours() > 9 ? fulldate.getHours() : '0' + fulldate.getHours())
+          var minutes = (fulldate.getMinutes() > 9 ? fulldate.getMinutes() : '0' + fulldate.getMinutes())
+          var seconds = (fulldate.getSeconds() > 9 ? fulldate.getSeconds() : '0' + fulldate.getSeconds())
+          return (year+"-"+month+"-"+day+"T"+hour+":"+minutes+":"+seconds)
+      }
 
 
 
   render(){
-  const icon = (this.state.weatherId === undefined ? null : <img src={'https://openweathermap.org/img/w/'+this.state.weatherId+'.png'} alt="Weather Icon"/>)
-  const weather = (this.props.item === null ? <h1>Loading Weather...</h1> : <Weather temperature={this.state.temperature} city={this.state.city} country={this.state.country} humidity={this.state.humidity} description={this.state.description} error={this.state.error} />)
-  const map = (this.state.lat === undefined ? <h3>Loading Map...</h3> : <GoogleApiWrapper lat={this.state.lat} lng={this.state.lon} loc={this.props.item} />)
+  const icon = (this.state.weatherId === undefined ? null : <img src={'https://darksky.net/images/weather-icons/'+this.state.weatherId+'.png'} alt="Weather Icon"/>)
+  const weather = (this.props.item === null ? <h1>Loading Weather...</h1> : <Weather temperature={this.state.temperature} city={this.state.city} humidity={this.state.humidity} description={this.state.description} units={this.state.units}/>)
 
       return(
         <div>
           {icon}
           {weather}
-          {map}
         </div>
       )
     };
@@ -92,7 +77,3 @@ console.log(this.props.item)
 
 export default WeatherApp;
 
-//ReactDOM.render(
-//	<WeatherApp />,
-//	document.getElementById('weatherApp')
-//)

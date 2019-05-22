@@ -8,14 +8,14 @@ class Weather extends React.Component{
 
             <div className="weather-info">
                 {
-                    this.props.country && this.props.city && <p className="weather__key">Location:
-                        <span className="weather__value">  {this.props.city}, {this.props.country}</span>
+                    this.props.city && <p className="weather__key">Location:
+                        <span className="weather__value">  {this.props.city}</span>
                     </p>
                 }
 
                 {
                     (Math.round(this.props.temperature * 10) / 10) && <p className="weather__key">Temperature:
-                        <span className="weather__value">  {(Math.round(this.props.temperature * 10) / 10) +'°C'}</span>
+                        <span className="weather__value">  {(Math.round(this.props.temperature * 10) / 10) + (this.props.units === "us" ? '°F' : '°C')}</span>
                     </p>
                 }
 
@@ -29,10 +29,6 @@ class Weather extends React.Component{
                     this.props.description && <p className="weather__key">Conditions:
                         <span className="weather__value">  {this.props.description}</span>
                     </p>
-                }
-
-                {
-                    this.props.error && <p className="weather__error">{this.props.error}</p>
                 }
 
             </div>
