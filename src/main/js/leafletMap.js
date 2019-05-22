@@ -14,7 +14,7 @@ constructor(props){
         attributionControl={true}
         zoomControl={true}
         doubleClickZoom={true}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         dragging={true}
         animate={true}
         easeLinearity={0.35}
