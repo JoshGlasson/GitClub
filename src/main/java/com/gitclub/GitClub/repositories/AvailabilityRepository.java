@@ -14,4 +14,6 @@ public interface AvailabilityRepository extends CrudRepository<Availability, Lon
     @Transactional
     List<Availability> deleteByFixtureid(Long fixtureid);
 
+    @Transactional
+    List<Availability> deleteByUserid(Long userid);
 }

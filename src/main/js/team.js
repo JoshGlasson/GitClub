@@ -32,13 +32,14 @@ constructor(props){
 
     deletePlayer(){
      console.log("Pre Fetch")
+                   fetch('/api/availabilities/search/deleteByUserid?userid='+ this.state.userid).then(
                    fetch('/api/users/'+ this.state.userid, {
                                    method: 'DELETE',
                                    headers: {
                                      'Accept': 'application/json',
                                      'Content-Type': 'application/json',
                                    },
-                                 })
+                                 }))
                };
 
      capitalise(string) {
