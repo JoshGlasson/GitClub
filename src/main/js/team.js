@@ -40,6 +40,7 @@ constructor(props){
                                      'Content-Type': 'application/json',
                                    },
                                  }))
+                                 location.href = window.location.href
                };
 
      capitalise(string) {
